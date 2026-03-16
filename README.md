@@ -7,8 +7,10 @@
 
 | Conteúdo | Situação | Observações extras |
 | -------- | -------- | ------------------ |
-| Análise de Algoritmos | ✅ | Conteúdo será revisado caso a turma queira |
-| Pilhas, filas e deques | ❌ | |
+| Análise de Algoritmos | ❌ | |
+| Pilhas | ❌ | |
+| Filas | ❌ | |
+| Deques | ❌ | |
 | Listas encadeadas | ❌ | |
 | Vetores e sequências | ❌ | |
 | Fila de prioridades | ❌ | |
