@@ -8,7 +8,7 @@
 | Conteúdo | Situação | Observações extras |
 | -------- | -------- | ------------------ |
 | Análise de Algoritmos | ❌ | |
-| Pilhas | ❌ | |
+| Pilhas | ❌ | Falta mostrar os códigos |
 | Filas | ❌ | |
 | Deques | ❌ | |
 | Listas encadeadas | ❌ | |
