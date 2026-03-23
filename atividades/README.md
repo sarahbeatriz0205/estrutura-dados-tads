@@ -1,0 +1,1 @@
+# Pasta destinada a guardar todas as atividades de Estrutura de Dados Lineares e Não Lineares
