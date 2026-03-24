@@ -1,6 +1,6 @@
 public class TestePilha {
 	public static void main(String[] args) {		
-		Integer[] b = new Integer[1];		
+		// Integer b[] = new Integer[1];		
 		PilhaRubroNegra pp=new PilhaRubroNegra(1);
 		System.out.println("Inserindo na pilha vermelha");
 		for(int f=0;f<10;f++){
