@@ -1,5 +1,4 @@
 public class TestePilha {
-
 	public static void main(String[] args) {		
 		Integer[] b = new Integer[1];		
 		PilhaRubroNegra pp=new PilhaRubroNegra(1);
@@ -18,10 +17,12 @@ public class TestePilha {
 
         System.out.println();
         System.out.println("Retornando o elemento do topo da pilha vermelha sem remover");
+		System.out.println("Índice: "+pp.retornaIndiceTopVermelho());
 		System.out.println(pp.topVermelho());
 
         System.out.println();
         System.out.println("Retornando o elemento do topo da pilha preta sem remover");
+		System.out.println("Índice: "+pp.retornaIndiceTopPreto());
 		System.out.println(pp.topPreto());
 
         System.out.println();

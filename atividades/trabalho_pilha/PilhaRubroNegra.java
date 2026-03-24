@@ -105,4 +105,12 @@ public class PilhaRubroNegra{
         }
         return a[tPreto];
     }
+
+    public int retornaIndiceTopPreto() throws PilhaVaziaExcecao{
+        return tPreto;
+    }
+
+    public int retornaIndiceTopVermelho() throws PilhaVaziaExcecao{
+        return tVermelho;
+    }
 }
