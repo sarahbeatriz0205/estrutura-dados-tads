@@ -9,7 +9,7 @@
 | -------- | -------- | ------------------ | ------------------ |
 | Análise de Algoritmos | ❌ |  | |
 | Pilhas | ✅ |  | **aulas_pilha** |
-| Filas | ❌ | | |
+| Filas | ✅ | | **aulas_fila**|
 | Deques | ❌ | | |
 | Listas encadeadas | ❌ | | |
 | Vetores e sequências | ❌ | | |
