@@ -6,7 +6,13 @@ public class No {
     public Object getElemento() {
         return elemento;
     }
+    public Object getProximo(){
+        this.proximo = proximo;
+    }
     public void setElemento(Object o){
         elemento = o;
+    }
+    public void setProximo(Object o){
+        return this.proximo;
     }
 }
