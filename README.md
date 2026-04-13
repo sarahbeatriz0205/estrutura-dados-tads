@@ -10,9 +10,9 @@
 | Análise de Algoritmos | ❌ |  | |
 | Pilhas | ✅ |  | **aulas_pilha** |
 | Filas | ✅ | | **aulas_fila**|
-| Deques | ❌ | | |
-| Listas encadeadas | ❌ | | |
-| Vetores e sequências | ❌ | | |
+| Deques | ✅ | | **aulas_deque** |
+| Listas encadeadas | ✅ | | |
+| Vetores e sequências | ✅ | | |
 | Fila de prioridades | ❌ | | |
 | Dicionário de dados |❌ | | |
 | Padrões de projeto | ❌ | | |
