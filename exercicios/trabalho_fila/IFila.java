@@ -6,5 +6,5 @@ public interface IFila {
     public abstract int size();
     public abstract Object first() throws FilaVaziaExcecao;
     public abstract boolean isEmpty();
-    public abstract void isReversed();
+    public abstract void reverse();
 }

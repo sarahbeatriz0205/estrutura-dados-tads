@@ -14,7 +14,7 @@ public class FilaArrayReverse implements IFila{
         this.incremento = incremento;
     }
 
-    public void isReversed(){
+    public void reverse(){
         reverse = !reverse;
     }
 

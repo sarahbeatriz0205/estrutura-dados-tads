@@ -21,23 +21,23 @@ public class TesteFilaArrayReverse {
         System.out.println(fila.dequeue()); // B
         System.out.println(fila.size());    // 1
 
-        // isReversed
+        // reverse()
         fila.enqueue("D");
         fila.enqueue("E");
-        fila.isReversed();
+        fila.reverse();
         System.out.println(fila.dequeue()); // E
         System.out.println(fila.dequeue()); // D
         System.out.println(fila.dequeue()); // C
 
         // ----------------------------
-        // isReversed duas vezes volta ao normal
-        System.out.println("\n-- isReversed duas vezes --");
+        // reverse() duas vezes volta ao normal
+        System.out.println("\n-- reverse() duas vezes --");
         FilaArrayReverse fila2 = new FilaArrayReverse(4, 0);
         fila2.enqueue("A");
         fila2.enqueue("B");
         fila2.enqueue("C");
-        fila2.isReversed();
-        fila2.isReversed();
+        fila2.reverse();
+        fila2.reverse();
         System.out.println(fila2.dequeue()); // A
         System.out.println(fila2.dequeue()); // B
         System.out.println(fila2.dequeue()); // C
@@ -48,9 +48,9 @@ public class TesteFilaArrayReverse {
         FilaArrayReverse fila3 = new FilaArrayReverse(4, 0);
         fila3.enqueue("A");
         fila3.enqueue("B");
-        fila3.isReversed();
+        fila3.reverse()();
         fila3.enqueue("Z"); // entra no início
-        fila3.isReversed();
+        fila3.reverse()();
         System.out.println(fila3.dequeue()); // Z
         System.out.println(fila3.dequeue()); // A
         System.out.println(fila3.dequeue()); // B
@@ -78,7 +78,7 @@ public class TesteFilaArrayReverse {
         fila5.enqueue("A");
         fila5.enqueue("B");
         fila5.enqueue("C");
-        fila5.isReversed();
+        fila5.reverse()();
         System.out.println(fila5.first()); // C
         System.out.println(fila5.size());  // 3 — first nao remove
 
