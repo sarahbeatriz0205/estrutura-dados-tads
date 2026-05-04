@@ -23,7 +23,7 @@ public class VetorDuplamenteEncadeado implements IVetor{
     }
 
     public Object elemAtRank(int r) throws VetorExcecao{
-        No aux = this.head; // começou no começo
+        No aux = this.head;
         if (r < 0 || r >= this.size){
             throw new VetorExcecao("Erro! Rank inválido");
         }
@@ -47,7 +47,7 @@ public class VetorDuplamenteEncadeado implements IVetor{
         }
         element = aux.getElemento();
         if (aux.getAnterior() != null){
-            aux.getAnterior().setProximo(aux.getProximo()); // significa que o próximo do anterior deve ser o próximo do atual
+            aux.getAnterior().setProximo(aux.getProximo());
         }
         else{
             this.head = aux.getProximo();
@@ -62,13 +62,54 @@ public class VetorDuplamenteEncadeado implements IVetor{
         return element;  
     }
 
-    public Object replaceAtRank(int r, Object o){
+    public Object replaceAtRank(int r, Object o) throws VetorExcecao{
+        if (r > this.size){
+            throw new VetorExcecao("Erro! Rank inválido");
+        }
         No aux = this.head;
         Object element;
         for (int i=0; i < r; ++i){
             aux = aux.getProximo();
         }
         element = aux.getElemento();
-        
-    }   
+        aux.setElemento(o);
+        return element;
+    }
+
+    public void insertAtRank(int r, Object o) throws VetorExcecao{
+        if (r > this.size){
+            throw new VetorExcecao("Erro! Rank inválido");
+        }
+        else{
+            No novo = new No(o);
+            if (this.size == 0) {
+                this.head = novo;
+                this.tail = novo;
+            } 
+            else if (r == 0) {
+                novo.setProximo(this.head);
+                this.head.setAnterior(novo);
+                this.head = novo;
+            }
+            else if (r == this.size){
+                No ultimo = this.tail; 
+                ultimo.setProximo(novo);
+                novo.setAnterior(ultimo);
+                tail = novo;
+            }
+            else{
+                No aux = this.head;
+                No anterior;
+                for (int i=0; i < r; ++i){
+                    aux = aux.getProximo();
+                }
+                anterior = aux.getAnterior();
+                novo.setProximo(aux);
+                novo.setAnterior(anterior);
+                aux.setAnterior(novo);
+                anterior.setProximo(novo);
+            } 
+        }
+        this.size++;
+    }
 }

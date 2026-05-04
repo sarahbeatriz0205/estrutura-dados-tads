@@ -1,3 +1,5 @@
+package exercicios.trabalho_vetor;
+
 public class No{
     private No proximo;
     private No anterior;
@@ -17,7 +19,7 @@ public class No{
         return this.anterior;
     }
 
-    public No getElemento(){
+    public Object getElemento(){
         return this.elemento;
     }
 
