@@ -24,7 +24,7 @@ public class VetorDuplamenteEncadeado implements IVetor{
 
     public Object elemAtRank(int r) throws VetorExcecao{
         No aux = this.head;
-        if (r < 0 || r >= this.size){
+        if (r < 0 || r >= size()){
             throw new VetorExcecao("Erro! Rank inválido");
         }
         for (int i=0; i < r; ++i){
@@ -34,7 +34,7 @@ public class VetorDuplamenteEncadeado implements IVetor{
     }
 
     public Object removeAtRank(int r) throws VetorExcecao{
-        if (r < 0 || r >= this.size){
+        if (r < 0 || r >= size()){
             throw new VetorExcecao("Erro! Rank inválido");
         }
         if (isEmpty()){
@@ -63,7 +63,7 @@ public class VetorDuplamenteEncadeado implements IVetor{
     }
 
     public Object replaceAtRank(int r, Object o) throws VetorExcecao{
-        if (r > this.size){
+        if (r > size()){
             throw new VetorExcecao("Erro! Rank inválido");
         }
         No aux = this.head;
@@ -77,7 +77,7 @@ public class VetorDuplamenteEncadeado implements IVetor{
     }
 
     public void insertAtRank(int r, Object o) throws VetorExcecao{
-        if (r > this.size){
+        if (r > size()){
             throw new VetorExcecao("Erro! Rank inválido");
         }
         else{

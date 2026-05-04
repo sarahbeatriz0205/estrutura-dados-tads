@@ -2,7 +2,6 @@ package exercicios.trabalho_vetor;
 
 public class TesteVetorEncadeado{
     public static void main(String[] args) {
-        // Altere 'ListaDupla' para o nome da sua classe que implementa IVetor
         IVetor lista = new VetorDuplamenteEncadeado(); 
 
         System.out.println("--- Iniciando Testes da Lista Duplamente Encadeada ---");
