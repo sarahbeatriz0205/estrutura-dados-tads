@@ -8,7 +8,7 @@ public interface ILista {
     public abstract Object before(No p);
     public abstract Object after(No p);
     public abstract Object replaceElement(No n, Object o);
-    public abstract void swapElements(No n, No q)
+    public abstract void swapElements(No n, No q);
     public abstract void insertBefore(No n, Object o);
     public abstract void insertAfter(No n, Object o);
     public abstract void insertFirst(Object o);

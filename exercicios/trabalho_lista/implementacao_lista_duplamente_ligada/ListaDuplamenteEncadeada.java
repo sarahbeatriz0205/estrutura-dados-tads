@@ -35,7 +35,7 @@ public class ListaDuplamenteEncadeada implements ILista{
         }
     }
 
-    public Object last(){
+    public Object last() throws ListaExcecao{
         if (isEmpty()){
             throw new ListaExcecao("Erro! Lista vazia")
         }
@@ -70,4 +70,8 @@ public class ListaDuplamenteEncadeada implements ILista{
             return elemento.getElemento();
         }
     }
+
+    public Object replaceElement(No n, Object o){
+        // fazer depois
+    } 
 }

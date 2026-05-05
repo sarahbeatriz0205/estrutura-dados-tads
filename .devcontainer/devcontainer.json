@@ -6,12 +6,9 @@
 	"image": "mcr.microsoft.com/devcontainers/java:3-25-trixie",
 
 	"features": {
-		"ghcr.io/devcontainers/features/java:1": {
-			"version": "none",
-			"installMaven": "true",
-			"installGradle": "true"
-		},
-		"ghcr.io/devcontainer-config/features/dot-config:4": {}
+		"ghcr.io/devcontainers/features/java:1": {},
+		"ghcr.io/devcontainer-config/features/dot-config:4": {},
+		"ghcr.io/roul/devcontainer-features/mise-java:1": {}
 	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

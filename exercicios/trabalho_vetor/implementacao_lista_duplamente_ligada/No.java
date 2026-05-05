@@ -1,4 +1,4 @@
-package exercicios.trabalho_vetor;
+package exercicios.trabalho_vetor.implementacao_lista_duplamente_ligada;
 
 public class No{
     private No proximo;

@@ -1,4 +1,4 @@
-package exercicios.trabalho_vetor;
+package exercicios.trabalho_vetor.implementacao_array;
 
 public interface IVetor {
     public abstract Object elemAtRank(int r);
