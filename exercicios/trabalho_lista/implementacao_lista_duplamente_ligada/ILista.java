@@ -1,4 +1,4 @@
-package exercicios.trabalho_lista;
+package exercicios.trabalho_lista.implementacao_lista_duplamente_ligada;
 
 public interface ILista {
     public abstract boolean isFirst(No n);
@@ -9,11 +9,11 @@ public interface ILista {
     public abstract Object after(No p);
     public abstract Object replaceElement(No n, Object o);
     public abstract void swapElements(No n, No q);
-    public abstract void insertBefore(No n, Object o);
-    public abstract void insertAfter(No n, Object o);
-    public abstract void insertFirst(Object o);
-    public abstract void insertLast(Object o);
-    public abstract No remove(No n);
+    public abstract No insertBefore(No n, Object o);
+    public abstract No insertAfter(No n, Object o);
+    public abstract No insertFirst(Object o);
+    public abstract No insertLast(Object o);
+    public abstract Object remove(No n);
     public abstract int size();
     public abstract boolean isEmpty();
 }
