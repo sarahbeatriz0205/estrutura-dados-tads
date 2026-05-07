@@ -52,3 +52,78 @@ Algoritmo postOrder(v)
         postOrder(w)
     visite(v)
 ~~~
+
+## Árvore Binária
+- Uma árvore binária é uma árvore com as seguintes propriedades:
+- Cada nó interno tem, no máximo, dois filhos
+    - Arvore binária própria é aquela em que cada nó tem exatemente zero ou dois filhos
+- Os filhos de um nó é um par ordenado
+
+### Árvore de decisão
+- Árvore binária associada com um processo de decisão
+- Nós internos: questões com respostas sim/não
+- Nós externos: decisões
+
+> Exemplo: Onde jantar
+
+![alt text](prints/image.png)
+
+### Propriedades de Árvore Binária (BT)
+> OBS: a altura (h) influencia no desempenho de outros métodos
+
+Notação
+**n** - número de nós
+**e** - número de nós externos
+**i** - número de nós internos
+**h** altura (height)
+
+Propriedades:
+
+**e** = i + 1
+
+**n** = 2e - 1
+
+**h** ≤ i
+
+**h** ≤ (n - 1)/2
+
+**e** ≤ 2h
+
+**h** ≥ log2 e
+
+**h** ≥ log2 (n + 1) - 1
+
+## TAD Árvore Binária
+- Herda todos os métodos de árvore mais outros métodos específicos
+Métodos adicionais:
+- Nó leftChild(v)
+    - Retorna o filho esquerdo de V
+- Nó rightChild(v)
+    - Retorna o filho esquerdo de V
+- Nó hasLeft(v)
+    - Retorna se V tem filho esquerdo
+- Nó hasRight(v)
+    - Retorna se V tem filho direito
+
+## Travessia em ordem (exclusivo de árvores binárias)
+Na travessia inorder, um nó é visitado depois do filho da esquerda e antes do filho da direita
+~~~
+Algoritmo inOrder(v)
+se (isInternal (v))
+    inOrder (leftChild (v))
+visite(v)
+se ( isInternal (v))
+    inOrder (rightChild (v))
+
+Algoritmo visite(v)
+    matriz[profundidade(v), i] = v
+~~~
+
+~~~java
+// Imprimir árvore na tela
+for (int l = 0; l < altura+1; l++>){
+    for (int c = 0; c < size(); c++>){
+        System.out.print(matriz[l, c]);
+    }
+}
+~~~
