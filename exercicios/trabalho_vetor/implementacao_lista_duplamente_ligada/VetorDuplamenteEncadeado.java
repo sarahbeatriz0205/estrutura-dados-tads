@@ -23,7 +23,7 @@ public class VetorDuplamenteEncadeado implements IVetor{
     }
 
     public Object elemAtRank(int r) throws VetorExcecao{
-        No aux = this.head;
+        No aux = this.head.getProximo();
         if (r < 0 || r >= size()){
             throw new VetorExcecao("Erro! Rank inválido");
         }

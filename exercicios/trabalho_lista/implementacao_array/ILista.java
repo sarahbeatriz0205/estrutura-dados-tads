@@ -9,10 +9,10 @@ public interface ILista {
     public abstract Object after(int p);
     public abstract Object replaceElement(int n, Object o);
     public abstract void swapElements(int n, int q);
-    public abstract No insertBefore(int n, Object o);
-    public abstract No insertAfter(int n, Object o);
-    public abstract No insertFirst(Object o);
-    public abstract No insertLast(Object o);
+    public abstract void insertBefore(int n, Object o);
+    public abstract void insertAfter(int n, Object o);
+    public abstract void insertFirst(Object o);
+    public abstract void insertLast(Object o);
     public abstract Object remove(int n);
     public abstract int size();
     public abstract boolean isEmpty();
