@@ -127,3 +127,66 @@ for (int l = 0; l < altura+1; l++>){
     }
 }
 ~~~
+
+## Nó para árvores
+- **Elemento:** Object
+- **Nó pai**
+- **Nó filhos**
+
+~~~java
+class No{
+    private Object elemento;
+    private No pai;
+    private ArrayList No filhos;
+}
+~~~
+
+## Nó para árvores binárias
+- Elemento
+- Nó pai
+- Filho da esquerda
+- Filho da direita
+
+## Implementação de árvore binária com array
+- Para percorrer, utiliza-se a técnica da multiplicação
+> acessar o item à esquerda: multiplica o índice atual por 2
+
+> acessar o item à direita: o resultado da multiplicação acima soma com 1 
+
+- Para saber qual é o pai, divido o índice do filho por 2
+- Utilizar array se houver certeza que a árvore estará cheia
+
+![alt text](prints/image2.png)
+
+## Árvore Binária de pesquisa
+- Uma árvore de pesquisa binária é uma árvore binária armazenando chaves (ou itens) em seus nós internos e satisfazendo a seguinte propriedade:
+    - Seja u, v e w três nós tais que u é nó esquerdo de v e w é o nó direito. Temos key(u) ≤ key(v) ≤ key(w)
+- O filho esquerdo do pai sempre será obrigatoriamente menor que o pai e o filho direito será maior
+- Para fins didáticos, não existe chave repetida
+- Sempre será O(h) -> h =  altura da árvore (log n)
+- A árvore cresce nas folhas, nunca nos nós internos
+- Remoção é diferente: pode remover de qualquer lugar
+
+![alt text](prints/image3.png)
+
+~~~
+Algoritmo TreeSearch(elemento_busca, raiz)
+    se T.isExternal (raiz) 
+        retorne raiz
+    se k < key(raiz)
+        retorne TreeSearch(elemento_busca, T.left(raiz))
+    senão se elemento_busca = key(raiz)
+        retorne raiz
+    senão { k > key(raiz) }
+        retorne TreeSearch(elemento_busca, T.right(raiz))
+~~~
+
+![alt text](prints/image4.png)
+
+## Inserção
+
+## Remoção
+- Existem 3 casos de remoção
+1. Remover um nó sem filhos: o nó vira null
+2. Remover o nó com apenas um filho: o filho desse nó agora será filho do pai do nó que foi removido
+3. Remover o nó com dois filhos: ir para subárvore direita, pego o elemento (atual) e vou verificando enquanto houver filho esquerdo. O sucessor do nó que iremos remover será esse atual. Encontrei o menor, ele vai para o lugar do nó que eu quero remover. A árvore inteira deve ser remanejada
