@@ -1,6 +1,6 @@
-package exercicios.trabalho_sequencia.implementacao_duplamente_ligada;
+package exercicios.implementacao_duplamente_ligada;
 
-public class SequenciaDuplamenteLigada implements ISequencia{
+public class SequenciaDuplamenteLigada extends ListaDuplamenteEncadeada implements ISequencia{
     private No head;
     private No tail;
     private int size;
@@ -9,7 +9,9 @@ public class SequenciaDuplamenteLigada implements ISequencia{
         this.head = new No(null);
         this.tail = new No(null);
         this.head.setProximo(tail);
+        this.head.setAnterior(null);
         this.tail.setAnterior(head);
+        this.tail.setProximo(null);
         this.size = 0;
     }
 
@@ -36,7 +38,7 @@ public class SequenciaDuplamenteLigada implements ISequencia{
 
     public int rankOf(No no) throws SequenciaExcecao{
         if (no == null || no == head || no == tail) {
-            throw new SequenciaExcecao("Exceção! Nó inválido ou sentinela");
+            throw new SequenciaExcecao("Exceção! Nó inválido");
         }
         No n =  this.head.getProximo();
         int r = 0;
@@ -66,7 +68,7 @@ public class SequenciaDuplamenteLigada implements ISequencia{
         if (isEmpty()){
             throw new SequenciaExcecao("Erro! Vetor vazio");
         }
-        No aux = this.head;
+        No aux = this.head.getProximo();
         Object element;
         for (int i=0; i < r; ++i){
             aux = aux.getProximo();
@@ -76,23 +78,23 @@ public class SequenciaDuplamenteLigada implements ISequencia{
             aux.getAnterior().setProximo(aux.getProximo());
         }
         else{
-            this.head = aux.getProximo();
+            this.head.setProximo(aux.getProximo());
         }
         if (aux.getProximo() != null){
             aux.getProximo().setAnterior(aux.getAnterior());
         }
         else{
-            this.tail = aux.getAnterior();
+            this.tail.setAnterior(aux.getAnterior());
         } 
         this.size--;
         return element;  
     }
 
     public Object replaceAtRank(int r, Object o) throws SequenciaExcecao{
-        if (r > size()){
+        if (r >= size()){
             throw new SequenciaExcecao("Erro! Rank inválido");
         }
-        No aux = this.head;
+        No aux = this.head.getProximo();
         Object element;
         for (int i=0; i < r; ++i){
             aux = aux.getProximo();
@@ -103,7 +105,7 @@ public class SequenciaDuplamenteLigada implements ISequencia{
     }
 
     public void insertAtRank(int r, Object o) throws SequenciaExcecao{
-        if (r > size()){
+        if (r >= size()){
             throw new SequenciaExcecao("Erro! Rank inválido");
         }
         else{
@@ -137,145 +139,5 @@ public class SequenciaDuplamenteLigada implements ISequencia{
             } 
         }
         this.size++;
-    }
-
-
-    // Métodos de lista
-    public Object first() throws SequenciaExcecao{
-        if (isEmpty()){
-            throw new SequenciaExcecao("Erro! Lista vazia");
-        }
-        else{
-            return this.head.getProximo().getElemento();
-        }
-    }
-
-    public Object last() throws SequenciaExcecao{
-        if (isEmpty()){
-            throw new SequenciaExcecao("Erro! Lista vazia");
-        }
-        else{
-            return this.tail.getAnterior().getElemento();
-        }
-    }
-
-    public Object before(No p) throws SequenciaExcecao{
-        if (p == null){
-            throw new SequenciaExcecao("Exceção! Nó não existe");
-        }
-        else if (p == this.head){
-            throw new SequenciaExcecao("Exceção! O nó aponta para null");
-        }
-        else{
-            No elemento = p.getAnterior();
-            return elemento.getElemento();
-        }
-    }
-
-    public Object after(No p){
-        if (p == null){
-            throw new SequenciaExcecao("Exceção! Nó não existe");
-        }
-        else if (p == this.tail){
-            throw new SequenciaExcecao("Exceção! O nó aponta para null");
-        }
-        else{
-            No elemento = p.getProximo();
-            return elemento.getElemento();
-        }
-    }
-
-    public Object replaceElement(No n, Object o) throws SequenciaExcecao{
-        Object element = n.getElemento();
-        if (n == null){
-            throw new SequenciaExcecao("Exceção! Nó não existe");
-        }
-        else if (n == this.head){
-            this.head.setElemento(o);
-        }
-        else{
-            n.setElemento(o);
-        }
-        return element;
-    }
-
-    public void swapElements(No n, No q){
-        if (n == null || q == null){
-            throw new SequenciaExcecao("Exceção! Nós não existem");
-        }
-        else{
-           Object aux = n.getElemento();
-           n.setElemento(q.getElemento());
-           q.setElemento(aux);
-        }
-    }
-
-    public No insertAfter(No n, Object o){
-        No q = new No(o);
-        q.setAnterior(n);
-        q.setProximo(n.getProximo());
-        if (n.getProximo() != null) {
-            n.getProximo().setAnterior(q);
-        }
-        this.size++;
-        return q;
-    } 
-
-    public No insertBefore(No n, Object o){
-        No q = new No(o);
-        q.setProximo(n);
-        q.setAnterior(n.getAnterior());
-        if (n.getAnterior() != null) {
-            n.getAnterior().setProximo(q);
-        }
-        this.size++;
-        return q;
-    }
-
-    public No insertFirst(Object o){
-        No novo = new No(o);
-        No proximo = this.head.getProximo();
-        novo.setAnterior(this.head);
-        novo.setProximo(proximo);
-        this.head.setProximo(novo);
-        if (this.head.getProximo() != null){
-            this.head.getProximo().setAnterior(novo);
-        }
-        this.size++;
-        return novo;
-    }
-
-    public No insertLast(Object o){
-        No novo = new No(o);
-        No anterior =  this.tail.getAnterior();
-        novo.setProximo(this.tail);
-        novo.setAnterior(anterior);
-        this.tail.setAnterior(novo);
-        if (anterior != null){
-            this.tail.getAnterior().setProximo(novo);
-        }
-        this.size++;
-        return novo;
-    }
-
-    public Object remove(No n){
-        Object removido = n.getElemento();
-        n.getAnterior().setProximo(n.getProximo());
-        n.getProximo().setAnterior(n.getAnterior());
-        this.size--;
-        return removido;
-    }
-
-    public int size(){
-        return this.size;
-    }
-
-    public boolean isEmpty(){
-        if (this.size == 0){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 }
