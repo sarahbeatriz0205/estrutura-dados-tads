@@ -1,6 +1,6 @@
-package exercicios.implementacao_duplamente_ligada;
+package exercicios.trabalho_sequencia.implementacao_duplamente_ligada;
 
-public class SequenciaDuplamenteLigada extends ListaDuplamenteEncadeada implements ISequencia{
+public class SequenciaDuplamenteLigada extends ListaDuplamenteEncadeada{
     private No head;
     private No tail;
     private int size;
@@ -17,11 +17,11 @@ public class SequenciaDuplamenteLigada extends ListaDuplamenteEncadeada implemen
 
     // Métodos "ponte"
     public No atRank(int rank) throws SequenciaExcecao{
-        if (rank < 0 || rank >= size()){
+        if (rank < 0 || rank >= this.size){
             throw new SequenciaExcecao("Erro! Rank inválido");
         }
         No aux;
-        if (rank <= size()/2){
+        if (rank <= this.size/2){
             aux = this.head.getProximo();
             for (int i=0; i < rank; i++){
                 aux = aux.getProximo();
@@ -29,7 +29,7 @@ public class SequenciaDuplamenteLigada extends ListaDuplamenteEncadeada implemen
         }
         else{
             aux = this.tail.getAnterior();
-            for (int i=0; i < size()-rank-1; i++){
+            for (int i=0; i < this.size-rank-1; i++){
                 aux = aux.getAnterior();
             }
         }
@@ -52,7 +52,7 @@ public class SequenciaDuplamenteLigada extends ListaDuplamenteEncadeada implemen
     // Métodos de vetor
     public Object elemAtRank(int r) throws SequenciaExcecao{
         No aux = this.head.getProximo();
-        if (r < 0 || r >= size()){
+        if (r < 0 || r >= this.size){
             throw new SequenciaExcecao("Erro! Rank inválido");
         }
         for (int i=0; i < r; ++i){
@@ -62,36 +62,24 @@ public class SequenciaDuplamenteLigada extends ListaDuplamenteEncadeada implemen
     }
 
     public Object removeAtRank(int r) throws SequenciaExcecao{
-        if (r < 0 || r >= size()){
+        if (r < 0 || r >= this.size){
             throw new SequenciaExcecao("Erro! Rank inválido");
         }
         if (isEmpty()){
             throw new SequenciaExcecao("Erro! Vetor vazio");
         }
-        No aux = this.head.getProximo();
-        Object element;
-        for (int i=0; i < r; ++i){
-            aux = aux.getProximo();
-        }
-        element = aux.getElemento();
-        if (aux.getAnterior() != null){
-            aux.getAnterior().setProximo(aux.getProximo());
-        }
-        else{
-            this.head.setProximo(aux.getProximo());
-        }
-        if (aux.getProximo() != null){
-            aux.getProximo().setAnterior(aux.getAnterior());
-        }
-        else{
-            this.tail.setAnterior(aux.getAnterior());
-        } 
+        No aux = atRank(r);
+        Object element = aux.getElemento();
+        No anterior = aux.getAnterior();
+        No proximo = aux.getProximo();
+        anterior.setProximo(proximo);
+        proximo.setAnterior(anterior);
         this.size--;
-        return element;  
+        return element;
     }
 
     public Object replaceAtRank(int r, Object o) throws SequenciaExcecao{
-        if (r >= size()){
+        if (r >= this.size || r < 0){
             throw new SequenciaExcecao("Erro! Rank inválido");
         }
         No aux = this.head.getProximo();
@@ -105,39 +93,41 @@ public class SequenciaDuplamenteLigada extends ListaDuplamenteEncadeada implemen
     }
 
     public void insertAtRank(int r, Object o) throws SequenciaExcecao{
-        if (r >= size()){
-            throw new SequenciaExcecao("Erro! Rank inválido");
+        No novo = new No(o);
+        if (r < 0 || r > this.size){
+            throw new SequenciaExcecao("Erro! Rank Inválido!");
+        }
+        if (this.size == 0) {
+            this.head.setProximo(novo);
+            novo.setAnterior(this.head);
+            this.tail.setAnterior(novo);
+            novo.setProximo(this.tail);
+        } 
+        else if (r == 0) {
+            novo.setProximo(this.head.getProximo());
+            this.head.getProximo().setAnterior(novo);
+            this.head.setProximo(novo);
+            novo.setAnterior(this.head);
+        }
+        else if (r == this.size){
+            No ultimo = this.tail.getAnterior(); 
+            ultimo.setProximo(novo);
+            novo.setAnterior(ultimo);
+            novo.setProximo(this.tail);
+            this.tail.setAnterior(novo);
         }
         else{
-            No novo = new No(o);
-            if (this.size == 0) {
-                this.head = novo;
-                this.tail = novo;
-            } 
-            else if (r == 0) {
-                novo.setProximo(this.head);
-                this.head.setAnterior(novo);
-                this.head = novo;
+            No aux = this.head.getProximo();
+            No anterior;
+            for (int i=0; i < r; ++i){
+                aux = aux.getProximo();
             }
-            else if (r == this.size){
-                No ultimo = this.tail; 
-                ultimo.setProximo(novo);
-                novo.setAnterior(ultimo);
-                tail = novo;
-            }
-            else{
-                No aux = this.head;
-                No anterior;
-                for (int i=0; i < r; ++i){
-                    aux = aux.getProximo();
-                }
-                anterior = aux.getAnterior();
-                novo.setProximo(aux);
-                novo.setAnterior(anterior);
-                aux.setAnterior(novo);
-                anterior.setProximo(novo);
-            } 
+            anterior = aux.getAnterior();
+            novo.setProximo(aux);
+            novo.setAnterior(anterior);
+            aux.setAnterior(novo);
+            anterior.setProximo(novo);
         }
-        this.size++;
+        this.size++; 
     }
 }

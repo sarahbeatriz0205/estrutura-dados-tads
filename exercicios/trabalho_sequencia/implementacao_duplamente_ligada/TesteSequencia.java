@@ -4,51 +4,89 @@ public class TesteSequencia {
     public static void main(String[] args) {
         try {
             ISequencia seq = new SequenciaDuplamenteLigada();
-            System.out.println("--- Iniciando Teste ---");
+            System.out.println("--- Iniciando Teste Geral (Vetor + Lista) ---");
 
-            // 1. Teste de inserção em leque (Extremidades e Meio)
-            seq.insertFirst("Meio");         // [Meio]
-            seq.insertFirst("Inicio");       // [Inicio, Meio]
-            seq.insertLast("Fim");           // [Inicio, Meio, Fim]
-            seq.insertAtRank(1, "Novo_1");   // [Inicio, Novo_1, Meio, Fim]
-            seq.insertAtRank(3, "Novo_3");   // [Inicio, Novo_1, Meio, Novo_3, Fim]
+            // ==========================================
+            // PARTE 1: INSERÇÕES MISTAS (VETOR + LISTA)
+            // ==========================================
+            System.out.println("\n[1] Testando Inserções...");
             
-            System.out.println("Tamanho esperado 5: " + seq.size());
-            imprimir(seq); 
-
-            // 2. Teste de busca por Nodo e Rank
-            No noMeio = seq.atRank(2); // Deve ser "Meio"
-            System.out.println("\nElemento no rank 2: " + noMeio.getElemento());
-            System.out.println("Rank detectado do nodo 'Meio': " + seq.rankOf(noMeio));
-
-            // 3. Teste de vizinhança (Before/After)
-            System.out.println("Antes do Meio: " + seq.before(noMeio)); // Novo_1
-            System.out.println("Depois do Meio: " + seq.after(noMeio));  // Novo_3
-
-            // 4. Teste de Substituição Dupla
-            seq.replaceElement(noMeio, "MEIO_ALTERADO");
-            seq.replaceAtRank(0, "INICIO_ALTERADO");
-            System.out.println("\nApós alterações:");
+            // Usando métodos de Vetor (Ranks)
+            seq.insertAtRank(0, "Meio");         // Estado: [Meio]
+            seq.insertAtRank(0, "Inicio");       // Estado: [Inicio, Meio]
+            
+            // Usando métodos herdados de Lista (Mãe)
+            seq.insertLast("Fim");               // Estado: [Inicio, Meio, Fim]
+            seq.insertFirst("Primeiro_De_Todos");// Estado: [Primeiro_De_Todos, Inicio, Meio, Fim]
+            
+            // Voltando para Vetor no meio da lista
+            seq.insertAtRank(2, "Novo_Rank2");   // Estado: [Primeiro_De_Todos, Inicio, Novo_Rank2, Meio, Fim]
+            
+            System.out.println("Tamanho atual (deve ser 5): " + seq.size());
             imprimir(seq);
 
-            // 5. O Grande Teste: Swap de vizinhos e Swap de distantes
-            System.out.println("\nRealizando Swaps...");
-            seq.swapElements(seq.atRank(0), seq.atRank(4)); // Troca Inicio com Fim
-            seq.swapElements(seq.atRank(1), seq.atRank(2)); // Troca Novo_1 com MEIO_ALTERADO
+            // ==========================================
+            // PARTE 2: BUSCA E VIZINHANÇA (MÉTODOS PONTE + LISTA)
+            // ==========================================
+            System.out.println("\n[2] Testando Navegação por Nós...");
+            
+            // Pega o nó do meio pelo Rank (Método Ponte)
+            No noAlvo = seq.atRank(3); // Deve recuperar o "Meio"
+            System.out.println("Nó recuperado no rank 3: " + noAlvo.getElemento());
+
+            // AJUSTE AQUI: Adicionado o Cast (No) para adaptar ao retorno da sua classe mãe
+            No noAnterior = (No) seq.before(noAlvo);
+            No noProximo  = (No) seq.after(noAlvo);
+            
+            System.out.println("Via before() (esperado 'Novo_Rank2'): " + noAnterior.getElemento());
+            System.out.println("Via after() (esperado 'Fim'): " + noProximo.getElemento());
+            
+            // Testando o inverso: descobrir o Rank a partir do Nó (Método Ponte)
+            System.out.println("Rank do nó 'Novo_Rank2': " + seq.rankOf(noAnterior));
+
+            // ==========================================
+            // PARTE 3: ALTERAÇÕES E SWAP (MÉTODOS DE LISTA)
+            // ==========================================
+            System.out.println("\n[3] Testando Alterações e Trocas...");
+            
+            // Substituição por Rank e por Nó
+            seq.replaceAtRank(0, "MUDOU_ANTERIOR");
+            seq.replaceElement(noAlvo, "MEIO_MUDADO"); // Herdados da mãe
+            
+            System.out.print("Estado antes do Swap: ");
             imprimir(seq);
 
-            // 6. Esvaziando a lista sistematicamente
-            System.out.println("\nLimpando a lista...");
+            // Testando o Swap da classe mãe
+            System.out.println("Executando swapElements entre o Rank 1 e o Rank 3...");
+            No nodo1 = seq.atRank(1);
+            No nodo3 = seq.atRank(3);
+            seq.swapElements(nodo1, nodo3);
+            
+            System.out.print("Estado após o Swap: ");
+            imprimir(seq);
+
+            // ==========================================
+            // PARTE 4: REMOÇÃO SISTEMÁTICA
+            // ==========================================
+            System.out.println("\n[4] Esvaziando a Sequência...");
+            
+            // Removendo um nó específico (Método de lista)
+            No noParaRemover = seq.atRank(2);
+            System.out.println("Removendo nó do meio via remove(No) (esperado 'Novo_Rank2'): " + seq.remove(noParaRemover));
+            imprimir(seq);
+
+            // Limpando o resto com método de Vetor
+            System.out.println("\nLimpando o resto com removeAtRank(0)...");
             while (!seq.isEmpty()) {
                 Object removido = seq.removeAtRank(0);
-                System.out.println("Removido: " + removido + " | Sobrou: " + seq.size());
+                System.out.println("Removido: " + removido + " | Sobrou tam: " + seq.size());
             }
 
             System.out.println("\nLista final está vazia? " + seq.isEmpty());
 
         } catch (Exception e) {
             System.err.println("\n--- FALHA NO TESTE ---");
-            System.err.println("Mensagem: " + e.getMessage());
+            System.err.println("Mensagem de erro: " + e.getMessage());
             e.printStackTrace();
         }
     }
