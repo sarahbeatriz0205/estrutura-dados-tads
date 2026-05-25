@@ -1,49 +1,21 @@
 # Estruturas de Dados I e II
 
-![Java](https://img.shields.io/badge/Linguagem-Java-orange.svg)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
-Este repositório contém as implementações, algoritmos e exercícios desenvolvidos durante a disciplina de **Estrutura de Dados Lineares e Não Lineares** do curso de Tecnologia em Análise e Desenvolvimento de Sistemas. O foco do projeto é o estudo da eficiência de algoritmos, manipulação de memória e tipos abstratos de dados.
+Este repositório contém as implementações, algoritmos e exercícios desenvolvidos durante a disciplina de **Estrutura de Dados Lineares e Não Lineares** do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas do IFRN**. O foco do projeto é o estudo da eficiência de algoritmos, manipulação de memória e tipos abstratos de dados.
 
-## 📌 Sumário
-- [Conteúdo Abordado](#conteudo)
-- [Estrutura do Repositório](#estrutura)
-- [Autoria](#autoria)
+## Implementações
+- [TAD Pilha implementado com array armazenando duas pilhas simultâneas](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_pilha)
+- [TAD Fila com reversão em O(1)](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_fila)
+- [TAD Fila implementado com lista simplesmente encadeada](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/fila_simplesmente_encadeada)
+- [TAD Vetor implementado com array e com lista duplamente encadeada](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_vetor)
+- [TAD Lista implementado com array e com lista duplamente encadeada](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_lista)
 
-<a name="conteudo"></a>
-## ℹ️ Conteúdo Abordado
-O repositório está dividido nos seguintes pilares:
-* **TADs (Tipos Abstratos de Dados)**: Modularização e encapsulamento de estruturas.
-* **Recursividade**: Resolução de problemas complexos através de funções recursivas.
-* **Estruturas Lineares**: Listas encadeadas, pilhas e filas.
-
-<a name="estrutura"></a>
-## 📁 Estrutura do repositório
-~~~
-├── 📁 aulas_arvore/
-     ├── README.md      
-├── 📁 aulas_deque/
-      ├── 📁 codigo/     
-├── 📁 aulas_fila/
-      ├── 📁 codigo/
-├── 📁 aulas_lista/
-      ├── README.md        
-├── 📁 aulas_pilha/
-      ├── 📁 codigo/
-├── 📁 aulas_sequencia/
-      ├── README.md   
-├── 📁 aulas_vetor/
-      ├── 📁 codigo/ 
-└── 📁 exercicios/
-      ├── 📁 fila_e_deque/
-      ├── 📁 fila_simplesmente_encadeada/
-      ├── 📁 trabalho_fila/
-      ├── 📁 trabalho_lista/
-      ├── 📁 trabalho_pilha/
-      ├── 📁 trabalho_vetor/     
-~~~
-
-<a name="autoria"></a>
-## ©️ Autoria
-* **Sarah Beatriz Barbosa do Nascimento**
-* **[GitHub](https://github.com/sarahbeatriz0205)**
-* **[LinkedIn](https://www.linkedin.com/in/sarah-nascimento-840247367)**
+## Anotações
+- [TAD Pilha](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_pilha)
+- [TAD Fila](https://github.com/sarahbeatriz0205/estrutura-dados-tads/blob/main/aulas_fila/codigo/FilaArray.java)
+- [TAD Vetor](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_vetor)
+- [TAD Lista](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_lista)
+- [TAD Sequência](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_sequencia)
+- [TAD Árvore](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_arvore)
+- [TAD Fila de prioridade](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_fila_de_prioridade)
