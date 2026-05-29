@@ -1,8 +1,8 @@
 # Estruturas de Dados I e II
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-
 Este repositório contém as implementações, algoritmos e exercícios desenvolvidos durante a disciplina de **Estrutura de Dados Lineares e Não Lineares** do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas do IFRN**. O foco do projeto é o estudo da eficiência de algoritmos, manipulação de memória e tipos abstratos de dados.
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
 ## Implementações
 - [TAD Pilha implementado com array armazenando duas pilhas simultâneas](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_pilha)
@@ -19,3 +19,4 @@ Este repositório contém as implementações, algoritmos e exercícios desenvol
 - [TAD Sequência](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_sequencia)
 - [TAD Árvore](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_arvore)
 - [TAD Fila de prioridade](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_fila_de_prioridade)
+- [TAD Heap](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas_heap)
