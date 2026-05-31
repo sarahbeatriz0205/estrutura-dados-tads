@@ -1,34 +1,32 @@
-package exercicios.trabalho_arvore;
+package arvore_generica;
 
-import java.util.Iterator;
-import java.util.ArrayList;
-
-public class ArvoreBinaria {
+public class Arvore 
+{
+	//Atributos da �rvore
 	No raiz;
 	int tamanho;
-    ArrayList<int> arvoreBinaria = new ArrayList<>();
-
-	public ArvoreBinaria(Object o){
-		raiz = new NoArvore(null, null, null, o);
+	//Construtor
+	public Arvore(Object o)
+	{
+		raiz = new No(null, o);
 		tamanho = 1;
-        arvoreBinaria.add(raiz);
 	}
-
-	public No root(){
-		return this.raiz;
+	/** Retorna a raiz da �rvore */
+	public No root()
+	{
+		return raiz;
 	}
-
-	/** Não sei dizer se minha classe NoArvore tá certa pra isso acontecer **/
-	public NoArvore parent(NoArvore v) {
-        return v.getPai();
+	/** Retorna o No pai de um No */
+	public No parent(No v)
+	{
+		return (v.parent());
 	}
 
 	/** retorna os filhos de um No */
-	public Iterator children(No v){
-
+	public Iterator children(No v)
+	{
 		return v.children();
 	}
-
 	/** Testa se um No � interno */
 	public boolean isInternal(No v)
 	{

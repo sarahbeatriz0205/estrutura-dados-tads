@@ -1,12 +1,12 @@
-package exercicios.trabalho_arvore;
+package arvore_binaria;
 
 public class NoArvore{
     private NoArvore filhoEsquerdo;
     private NoArvore filhoDireito;
     private NoArvore pai;
-    private Object elemento;
+    private int elemento;
 
-    public NoArvore(NoArvore filhoEsquerdo, NoArvore filhoDireito, NoArvore pai, Object o){
+    public NoArvore(NoArvore filhoEsquerdo, NoArvore filhoDireito, NoArvore pai, int o){
         this.filhoEsquerdo = filhoEsquerdo;
         this.filhoDireito = filhoDireito;
         this.pai = pai;
@@ -25,7 +25,23 @@ public class NoArvore{
         return this.pai;
     }
 
-    public Object getElemento(){
+    public int getElemento(){
         return this.elemento;
+    }
+
+    public void setFilhoEsquerdo(NoArvore v){
+        this.filhoEsquerdo = v;
+    }
+
+    public void setFilhoDireito(NoArvore v){
+        this.filhoDireito = v;
+    }
+
+    public void setPai(NoArvore v){
+        this.pai = v;
+    }
+
+    public void setElemento(int o){
+        this.elemento = o;
     }
 }

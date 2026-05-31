@@ -1,4 +1,4 @@
-package aula01;
+package aulas_pilha.codigo;
 // Classe de exceção personalizada para sinalizar quando a pilha está vazia
 public class PilhaVaziaExcecao extends RuntimeException{
     // Construtor que recebe a mensagem de erro

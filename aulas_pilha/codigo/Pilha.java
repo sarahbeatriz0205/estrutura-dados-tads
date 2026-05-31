@@ -1,4 +1,4 @@
-package aula01;
+package aulas_pilha.codigo;
 
 public interface Pilha{
     public int size();
