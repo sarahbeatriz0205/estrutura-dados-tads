@@ -9,14 +9,18 @@ public class HeapArray{
 
     public void upheap(){
         int n = this.tamanho;
-        int p = this.tamanho/2;
         
-        while (n > 1 && o[n] < o[p]){
-            int novo = o[this.tamanho];
+        while (n > 1){
+            int p = n/2;
+
+            if (o[n] >= o[p]) {
+                break;
+            }
+
+            int novo = o[n];
             o[n] = o[p];
             o[p] = novo;
             n = p;
-            p = p/2;
         }
     }
 
@@ -28,10 +32,10 @@ public class HeapArray{
 
     public void downheap(){
         int atual = 1;
-        while (atual*2 > this.tamanho){
+        while (atual*2 <= this.tamanho){
             int filhoEsquerdo = atual*2;
-            int filhoDireito = (atual*2)+1;
-            int menor = o[filhoEsquerdo] < o[filhoDireito] ? o[filhoEsquerdo] : o[filhoDireito];
+            int filhoDireito = atual*2+1;
+            int menor = o[filhoEsquerdo] < o[filhoDireito] ? filhoEsquerdo : filhoDireito;
             if (filhoDireito <= tamanho && o[filhoDireito] < o[filhoEsquerdo]) {
                 menor = filhoDireito;
             }
