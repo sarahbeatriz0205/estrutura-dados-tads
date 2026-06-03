@@ -10,6 +10,7 @@ Este repositório contém as implementações, algoritmos e exercícios desenvol
 - [TAD Fila implementado com lista simplesmente encadeada](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/fila_simplesmente_encadeada)
 - [TAD Vetor implementado com array e com lista duplamente encadeada](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_vetor)
 - [TAD Lista implementado com array e com lista duplamente encadeada](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_lista)
+- [TAD Árvore implementado com nós](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_arvore/arvore_generica/Arvore.java
 - [TAD Árvore Binária implementado com nós](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_arvore/arvore_binaria/ArvoreBinaria.java)
 
 ## Anotações
