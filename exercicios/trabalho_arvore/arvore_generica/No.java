@@ -1,3 +1,5 @@
+package arvore_generica;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -32,10 +34,14 @@ public class No {
     }
 
     public int childrenNumber(){
-        return filhos.length;
+        return filhos.size();
     }
 
-    public Iterator<No> children(){
+    public Iterator<No> childrenIterator(){
         return filhos.iterator();
+    }
+
+    public ArrayList<No> childrenArray(){
+        return filhos;
     }
 }

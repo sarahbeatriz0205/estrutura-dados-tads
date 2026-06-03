@@ -1,18 +1,18 @@
 public class HeapArray{
-    private Object o[];
+    private int o[];
     private int tamanho;
 
-    public HeapArray(int tamanho){
-        this.tamanho = tamanho;
-        o = new Object[tamanho];
+    public HeapArray(int capacidade){
+        this.tamanho = 0;
+        o = new int[capacidade+1];
     }
 
     public void upheap(){
         int n = this.tamanho;
         int p = this.tamanho/2;
         
-        while (o[n] < o[p]){
-            int novo = o[tamanho];
+        while (n > 1 && o[n] < o[p]){
+            int novo = o[this.tamanho];
             o[n] = o[p];
             o[p] = novo;
             n = p;
@@ -20,23 +20,38 @@ public class HeapArray{
         }
     }
 
-    public void insert(Object k){
+    public void insert(int k){
         this.tamanho++;
-        o[tamanho] = k;
+        o[this.tamanho] = k;
         upheap();
     }
 
     public void downheap(){
-        int filhoEsquerdo = this.tamanho*2;
-        int filhoDireito = (this.tamanho*2)+1
         int atual = 1;
+        while (atual*2 > this.tamanho){
+            int filhoEsquerdo = atual*2;
+            int filhoDireito = (atual*2)+1;
+            int menor = o[filhoEsquerdo] < o[filhoDireito] ? o[filhoEsquerdo] : o[filhoDireito];
+            if (filhoDireito <= tamanho && o[filhoDireito] < o[filhoEsquerdo]) {
+                menor = filhoDireito;
+            }
 
+            if (o[atual] <= o[menor]) {
+                break;
+            }
 
+            int temp = o[atual];
+            o[atual] = o[menor];
+            o[menor] = temp;
+
+            atual = menor;
+        }
+        
     }
 
     public Object removeMin(){
         Object elemento = o[1];
-        o[1] = o[this.tamanho--];
+        o[1] = o[this.tamanho];
         this.tamanho--;
         downheap();
         return elemento;

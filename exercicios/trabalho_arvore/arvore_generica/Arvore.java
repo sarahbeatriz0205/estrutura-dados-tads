@@ -1,13 +1,18 @@
 package arvore_generica;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Arvore{
 	
 	No raiz;
 	int tamanho;
+	ArrayList<No> nos = new ArrayList<No>();
+
 
 	public Arvore(Object o){
-		raiz = new No(null, o);
-		tamanho = 1;
+		this.raiz = new No(null, o);
+		nos.add(this.raiz);
+		this.tamanho = 1;
 	}
 
 	public No root(){
@@ -18,8 +23,8 @@ public class Arvore{
 		return v.getPai();
 	}
 
-	public Iterator children(No v){
-		return v.children();
+	public Iterator<No> children(No v){
+		return v.childrenIterator();
 	}
 
 	public boolean isInternal(No v){
@@ -46,21 +51,22 @@ public class Arvore{
 	public void addChild(No v, Object o){
 		No novo = new No(v, o);
 		v.addChild(novo);
+		nos.add(novo);
 		this.tamanho++;
 	}
 
-	/** Remove um No
-	 *  S� pode remover Nos externos e que tenham um pai (n�o seja raiz)
-	*/
 	public Object remove(No v) throws ArvoreExcecao{
-		No pai = v.parent();
-		if (pai != null || isExternal(v))
+		No pai = v.getPai();
+		if (pai != null && isExternal(v)){
 			pai.removeChild(v);
-		else
-			throw new ArvoreExcecao("Nó inválido");
+			nos.remove(v);
+		}
+		else{throw new ArvoreExcecao("Nó inválido");}
+
 		Object o = v.element();
 		tamanho--;
 		return o;
+		
 	}
 
 	public int depth(No v){
@@ -71,7 +77,7 @@ public class Arvore{
 		if (v == raiz)
 			return 0;
 		else
-			return 1 + profundidade(v.parent());
+			return 1 + profundidade(v.getPai());
 	}
 
 	public int height(No v){
@@ -83,7 +89,7 @@ public class Arvore{
 			return 0;
 		} else {
 			int h = 0;
-			for (Object f : v.children()){
+			for (No f : v.childrenArray()){
 				h = Math.max(h, altura(f));
 			}
 			return 1+h;
@@ -94,52 +100,49 @@ public class Arvore{
 		return this.tamanho;
 	}
 
-	/** Sempre vai ser falso, pois não permitimos remover a raiz */
 	public boolean isEmpty(){
 		return false;
 	}
 
 	private void visite(No v){
-		System.out.println(v.element())
+		System.out.println(v.element());
 	}
 
 	public void preOrder(No v){
 		visite(v);
-		for (Object f : v.children()){
+		for (No f : v.childrenArray()){
 			preOrder(f);
 		}
 	}
 
 	public void postOrder(No v){
-		for (Object f : v.children()){
+		for (No f : v.childrenArray()){
 			postOrder(f);
 		}
 		visite(v);
 	}
 
 	public Object replace(No v, Object o){
-		No e = v.element();
+		Object e = v.element();
 		v.setElement(o);
 		return e;
 	}
 
-	public Iterator elements(){
-		
-		return null;
+	public Iterator<Object> elements(){
+		ArrayList<Object> elementos = new ArrayList<Object>();
+		for (No n : nos){
+			elementos.add(n.element());
+		}
+		return elementos.iterator();
 	}
 
-	/** Retorna um iterator com as posi��es (Nos) da �rvore */
-	public Iterator Nos(){
-		// M�todo que serve de exerc�cio
-		return null;
+	public Iterator<No> Nos(){
+		return nos.iterator();
 	}
 
-	/** Troca dois elementos de posi��o */
 	public void swapElements(No v, No w){
-		/*M�todo que serve de exerc�cio
-		 * Este m�todo dever� fazer com que o objeto
-		 * que estava na posi��o v fique na posi��o w
-		 * e fazer com que o objeto que estava na posi��o w
-		 * fique na posi��o v
-		 */  
+		Object temp = v.element();
+		v.setElement(w.element());
+		w.setElement(temp);
 	}
+}
