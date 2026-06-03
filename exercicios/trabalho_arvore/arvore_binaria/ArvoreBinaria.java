@@ -103,9 +103,8 @@ public class ArvoreBinaria {
     }
 
     public void visite(NoArvore v){
-        // método que vai imprimir a árvore no console
+        //
     }
-
 
     public NoArvore search(int k, NoArvore v){
         if (ArvoreBinaria.isExternal(v)){
@@ -123,6 +122,12 @@ public class ArvoreBinaria {
     }
 
     public void insert(int k, NoArvore v){
-        // tentar usar search
+        // tentar usar search de alguma forma
     } 
+
+    public void imprimirArvore(int linhas, int colunas){
+        int[][] matriz = new int[linhas][colunas];
+        int colocacao_raiz = matriz[0].length / 2;
+        matriz[0][colocacao_raiz] = this.raiz.getElemento(); 
+    }
 }
