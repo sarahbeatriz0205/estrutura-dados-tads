@@ -1,168 +1,145 @@
 package arvore_generica;
 
-public class Arvore 
-{
-	//Atributos da �rvore
+public class Arvore{
+	
 	No raiz;
 	int tamanho;
-	//Construtor
-	public Arvore(Object o)
-	{
+
+	public Arvore(Object o){
 		raiz = new No(null, o);
 		tamanho = 1;
 	}
-	/** Retorna a raiz da �rvore */
-	public No root()
-	{
-		return raiz;
-	}
-	/** Retorna o No pai de um No */
-	public No parent(No v)
-	{
-		return (v.parent());
+
+	public No root(){
+		return this.raiz;
 	}
 
-	/** retorna os filhos de um No */
-	public Iterator children(No v)
-	{
+	public No parent(No v){
+		return v.getPai();
+	}
+
+	public Iterator children(No v){
 		return v.children();
 	}
-	/** Testa se um No � interno */
-	public boolean isInternal(No v)
-	{
-		return (v.childrenNumber() > 0);
+
+	public boolean isInternal(No v){
+		if (v.childrenNumber() != 0){
+			return true;
+		}
+		return false;
 	}
-	/** Testa se um No � externo*/
-	public boolean isExternal(No v)
-	{
-		return (v.childrenNumber() == 0);
+	
+	public boolean isExternal(No v){
+		if (v.childrenNumber() == 0){
+			return true;
+		}
+		return false;
 	}
-	/** Testa se um No � a raiz */
-	public boolean isRoot(No v)
-	{
-		return v == raiz;
+
+	public boolean isRoot(No v){
+		if (v == root()){
+			return true;
+		}
+		return false;
 	}
-	/** Adiciona um filho a um No */
-	public void addChild(No v, Object o)
-	{
+
+	public void addChild(No v, Object o){
 		No novo = new No(v, o);
 		v.addChild(novo);
-		tamanho++;
+		this.tamanho++;
 	}
+
 	/** Remove um No
 	 *  S� pode remover Nos externos e que tenham um pai (n�o seja raiz)
 	*/
-	public Object remove(No v) throws InvalidNoException
-	{
+	public Object remove(No v) throws ArvoreExcecao{
 		No pai = v.parent();
 		if (pai != null || isExternal(v))
 			pai.removeChild(v);
 		else
-			throw new InvalidNoException();
+			throw new ArvoreExcecao("Nó inválido");
 		Object o = v.element();
 		tamanho--;
 		return o;
 	}
+
+	public int depth(No v){
+		return profundidade(v);
+	}
+
+	private int profundidade(No v){
+		if (v == raiz)
+			return 0;
+		else
+			return 1 + profundidade(v.parent());
+	}
+
+	public int height(No v){
+		return altura(v);
+	}
+
+	private int altura(No v){
+		if (isExternal(v)){
+			return 0;
+		} else {
+			int h = 0;
+			for (Object f : v.children()){
+				h = Math.max(h, altura(f));
+			}
+			return 1+h;
+		}
+	}
+
+	public int size(){
+		return this.tamanho;
+	}
+
+	/** Sempre vai ser falso, pois não permitimos remover a raiz */
+	public boolean isEmpty(){
+		return false;
+	}
+
+	private void visite(No v){
+		System.out.println(v.element())
+	}
+
+	public void preOrder(No v){
+		visite(v);
+		for (Object f : v.children()){
+			preOrder(f);
+		}
+	}
+
+	public void postOrder(No v){
+		for (Object f : v.children()){
+			postOrder(f);
+		}
+		visite(v);
+	}
+
+	public Object replace(No v, Object o){
+		No e = v.element();
+		v.setElement(o);
+		return e;
+	}
+
+	public Iterator elements(){
+		
+		return null;
+	}
+
+	/** Retorna um iterator com as posi��es (Nos) da �rvore */
+	public Iterator Nos(){
+		// M�todo que serve de exerc�cio
+		return null;
+	}
+
 	/** Troca dois elementos de posi��o */
-	public void swapElements(No v, No w)
-	{
+	public void swapElements(No v, No w){
 		/*M�todo que serve de exerc�cio
 		 * Este m�todo dever� fazer com que o objeto
 		 * que estava na posi��o v fique na posi��o w
 		 * e fazer com que o objeto que estava na posi��o w
 		 * fique na posi��o v
 		 */  
-		
 	}
-	/** Retorna a profundidade de um No */
-	public int depth(No v)
-	{
-		int profundidade = profundidade(v);
-		return profundidade;
-	}
-	private int profundidade(No v)
-	{
-		if (v == raiz)
-			return 0;
-		else
-			return 1 + profundidade(v.parent());
-	}
-	/** Retorna a altura da �rvore */
-	public int height()
-	{
-		// M�todo que serve de exerc�cio
-		int altura = 0;
-		return altura;
-	}
-	/** Retorna um iterator com os elementos armazenados na �rvore */
-	public Iterator elements()
-	{
-		// M�todo que serve de exerc�cio
-		return null;
-	}
-	/** Retorna um iterator com as posi��es (Nos) da �rvore */
-	public Iterator Nos()
-	{
-		// M�todo que serve de exerc�cio
-		return null;
-	}
-	/** Retorna o n�mero de Nos da �rvore
-	 */
-	public int size()
-	{
-	 // M�todo que serve de exerc�cio
-		return 0;
-	}
-	/** Retorna se a �vore est� vazia. Sempre vai ser falso, pois n�o permitimos remover a raiz
-	 */
-	public boolean isEmpty()
-	{
-		return false;
-	}
-	public Object replace(No v, Object o)
-	{
-	 // M�todo que serve de exerc�cio
-		return null;
-	}
-	/* In�cio da classe aninhada para armazenar o No*/
-	public class No 
-	{
-		private Object o;
-		private No pai;
-		private ArrayList filhos = new ArrayList();
-		public No(No pai, Object o)
-		{
-			this.pai = pai;
-			this.o = o;
-		}
-		public Object element()
-		{
-			return o;
-		}
-		public No parent()
-		{
-			return pai;
-		}
-		public void setElement(Object o)
-		{
-			this.o = o;
-		}
-		public void addChild(No o)
-		{
-			filhos.add(o);
-		}
-		public void removeChild(No o)
-		{
-			filhos.remove(o);
-		}
-		public int childrenNumber()
-		{
-			return filhos.size();
-		}
-		public Iterator children()
-		{
-			return filhos.iterator();
-		}
-	}
-	/* Fim da classe aninhada para armazenar o No */
-}
