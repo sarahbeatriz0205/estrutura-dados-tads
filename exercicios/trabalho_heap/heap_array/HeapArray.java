@@ -1,3 +1,5 @@
+package heap_array;
+
 public class HeapArray{
     private int o[];
     private int tamanho;

@@ -3,6 +3,8 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 
+import arvore_generica.Arvore;
+
 public class ArvoreBinaria {
     private NoArvore raiz;
     private int size;
@@ -87,6 +89,20 @@ public class ArvoreBinaria {
 
     public static NoArvore rightChild(NoArvore v){
         return v.getFilhoDireito();
+    }
+
+    public boolean hasLeft(NoArvore v){
+        if (ArvoreBinaria.leftChild(v) != null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasRight(NoArvore v){
+        if (ArvoreBinaria.rightChild(v) != null){
+            return true;
+        }
+        return false;
     }
 
     public NoArvore parent(NoArvore v){
