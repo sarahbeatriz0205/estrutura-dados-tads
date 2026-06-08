@@ -2,10 +2,12 @@ package heap_nos;
 
 public class HeapNos {
     private NoHeap raiz;
+    private NoHeap ultimo;
     private int size;
 
-    public HeapNos(Object o){
+    public HeapNos(Item o){
         this.raiz = new NoHeap(null, null, null, o);
+        this.ultimo = this.raiz;
         this.size = 1;
     }
 
@@ -17,8 +19,22 @@ public class HeapNos {
         return false;
     }
 
-    public NoHeap min(){
-        return this.raiz;
+    public Item min(){
+        return this.raiz.getElemento();
+    }
+
+    public void changeLast(){
+        NoHeap temp = this.ultimo;
+        while (temp.getPai() != null && temp == temp.getPai().getFilhoDireito()){
+            temp = temp.getPai();
+        }
+        if (temp.getPai() != null) {
+            temp = temp.getPai().getFilhoDireito();
+        }
+        while (temp.getFilhoEsquerdo() != null) {
+            temp = temp.getFilhoEsquerdo();
+        }
+        this.ultimo = temp;
     }
 
     public static NoHeap leftChild(NoHeap v){
@@ -47,15 +63,16 @@ public class HeapNos {
         //
     }
 
-    public void insert(int k, Object o){
+    public void insert(Item o){
         //
+        
     }
 
     public void downheap(){
         //
     }
 
-    public Object removeMin(){
+    public Item removeMin(){
         //
     }
 }

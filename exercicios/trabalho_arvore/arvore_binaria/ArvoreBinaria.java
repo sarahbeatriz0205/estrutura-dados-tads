@@ -3,9 +3,24 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 
-import arvore_generica.Arvore;
+/* MÉTODOS QUE FALTAM IMPLEMENTAR OU PRECISAM DE CONSERTO!
 
-public class ArvoreBinaria {
+    inOrder
+
+    postOrder
+    
+    heigth (com parâmetros)
+    
+    remove (bugs)
+
+    height (sem parâmetros)
+   
+    imprimirArvore (completo)
+   
+    elementos (ou método para retornar a lista de nós) */
+
+
+public class ArvoreBinaria{
     private NoArvore raiz;
     private int size;
 
@@ -109,41 +124,117 @@ public class ArvoreBinaria {
         return v.getPai();
     }
 
+    public void preOrder(NoArvore v){
+        if (v == null){
+            return;
+        }
+        visite(v);
+        preOrder(leftChild(v));
+        preOrder(rightChild(v));
+    }
+
+    public void postOrder(NoArvore v){
+        if (v == null){
+            return;
+        }
+        postOrder(leftChild(v));
+        visite(v);
+        postOrder(rightChild(v));
+        visite(v);
+    }
+
     public void inOrder(NoArvore v){
         if (isInternal(v)){
             inOrder(leftChild(v));
         } visite(v);
         if (isInternal(v)){
             inOrder(rightChild(v));
-        } visite(v);
+        } 
     }
 
     public void visite(NoArvore v){
-        //
+        System.out.print(v.getElemento());
     }
 
     public NoArvore search(int k, NoArvore v){
-        if (ArvoreBinaria.isExternal(v)){
+        if (k == v.getElemento()){
             return v;
+        }  
+        if (k < v.getElemento() && v.getFilhoEsquerdo() != null){
+                return search(k, v.getFilhoEsquerdo());
         }
-        if (k < v.getElemento()){
-            return search(k, ArvoreBinaria.leftChild(v));
+        if (k > v.getElemento() && v.getFilhoDireito() != null){
+            return search(k, v.getFilhoDireito());
         }
-        else if (k == v.getElemento()){
-            return v;
-        }
-        else{
-            return search(k, ArvoreBinaria.rightChild(v));
-        }
+        return v;
     }
 
-    public void insert(int k, NoArvore v){
-        // tentar usar search de alguma forma
+    public void insert(int k, NoArvore v) throws ArvoreExcecao{
+        NoArvore encontrado = search(k, v);
+        if (encontrado.getElemento() == k){
+            throw new ArvoreExcecao("Erro! Nó já existente");
+        }
+
+        NoArvore novo = new NoArvore(null, null, encontrado, k);
+
+        if (novo.getElemento() < encontrado.getElemento()){
+            encontrado.setFilhoEsquerdo(novo);
+        }
+        else {
+            encontrado.setFilhoDireito(novo);
+        }
+        this.size++;
     } 
+
+    public int remove(NoArvore v){
+        int element = v.getElemento();
+
+        /* Se um nó for externo, basta ele virar null */
+        if (isExternal(v)){
+            if (v.getElemento() < v.getPai().getElemento()){
+                v.getPai().setFilhoEsquerdo(null);
+            } else {
+                v.getPai().setFilhoDireito(null);
+            }
+            return element;
+        }
+
+        /* Se o nó tiver apenas UM filho */
+        NoArvore aux = v.getPai();
+        NoArvore esq = v.getFilhoEsquerdo();
+        NoArvore dir = v.getFilhoDireito();
+
+        if ((v.getFilhoEsquerdo() == null && v.getFilhoDireito() != null) || (v.getFilhoEsquerdo() != null && v.getFilhoDireito() == null)){
+            if (v.getFilhoEsquerdo() != null){
+                v.getFilhoEsquerdo().setPai(aux);
+            } else {
+                v.getFilhoDireito().setPai(aux);
+            }
+            if (v.getFilhoEsquerdo().getElemento() < aux.getElemento()){
+                    aux.setFilhoEsquerdo(esq);    
+            } else{
+                aux.setFilhoDireito(dir);
+            }
+            return element;
+        }
+
+        /* Nó com DOIS filhos */
+        NoArvore atual = v.getFilhoDireito();
+        if (v.getFilhoEsquerdo() != null && v.getFilhoDireito() != null){
+             while (isInternal(leftChild(atual))) {
+                atual = atual.getFilhoEsquerdo();
+             }
+             int temp = atual.getElemento();
+             remove(atual);
+             v.getFilhoDireito().getPai().setElemento(temp);
+        }
+        return element;
+    }
 
     public void imprimirArvore(int linhas, int colunas){
         int[][] matriz = new int[linhas][colunas];
         int colocacao_raiz = matriz[0].length / 2;
-        matriz[0][colocacao_raiz] = this.raiz.getElemento(); 
+        matriz[0][colocacao_raiz] = this.raiz.getElemento();
+        /* ainda preciso desenhar melhor como vou fazer isso */
     }
 }

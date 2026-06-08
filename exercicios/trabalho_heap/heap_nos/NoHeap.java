@@ -4,9 +4,9 @@ public class NoHeap {
     private NoHeap filhoEsquerdo;
     private NoHeap filhoDireito;
     private NoHeap pai;
-    private int elemento;
+    private Item elemento;
 
-    public NoHeap(NoHeap filhoEsquerdo, NoHeap filhoDireito, NoHeap pai, Object o){
+    public NoHeap(NoHeap filhoEsquerdo, NoHeap filhoDireito, NoHeap pai, Item o){
         this.filhoEsquerdo = filhoEsquerdo;
         this.filhoDireito = filhoDireito;
         this.pai = pai;
@@ -25,7 +25,7 @@ public class NoHeap {
         return this.pai;
     }
 
-    public int getElemento(){
+    public Item getElemento(){
         return this.elemento;
     }
 
@@ -41,7 +41,7 @@ public class NoHeap {
         this.pai = v;
     }
 
-    public void setElemento(int o){
+    public void setElemento(Item o){
         this.elemento = o;
     }
 }
