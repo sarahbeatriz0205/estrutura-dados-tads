@@ -62,6 +62,7 @@ public class ArvoreBinaria{
         }
     }
 
+
     public static Iterator<NoArvore> children(NoArvore v){
         List<NoArvore> filhos = new ArrayList<>();
         if (v.getFilhoEsquerdo() != null){

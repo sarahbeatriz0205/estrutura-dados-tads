@@ -1,5 +1,6 @@
 package heap_nos;
 
-public class Comparador {
-    
+public class Comparador{
+    //
 }
+    
