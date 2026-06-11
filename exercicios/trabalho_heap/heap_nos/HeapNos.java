@@ -1,14 +1,15 @@
 package heap_nos;
+import java.util.ArrayList;
 
-public class HeapNos {
+public class HeapNos implements IHeap{
     private NoHeap raiz;
-    private NoHeap ultimo;
     private int size;
+    private ArrayList<NoHeap> nos;
 
     public HeapNos(Item o){
         this.raiz = new NoHeap(null, null, null, o);
-        this.ultimo = this.raiz;
         this.size = 1;
+        nos = new ArrayList<>(); nos.add(this.raiz);
     }
 
     public int size(){
@@ -21,20 +22,6 @@ public class HeapNos {
 
     public Item min(){
         return this.raiz.getElemento();
-    }
-
-    public void changeLast(){
-        NoHeap temp = this.ultimo;
-        while (temp.getPai() != null && temp == temp.getPai().getFilhoDireito()){
-            temp = temp.getPai();
-        }
-        if (temp.getPai() != null) {
-            temp = temp.getPai().getFilhoDireito();
-        }
-        while (temp.getFilhoEsquerdo() != null) {
-            temp = temp.getFilhoEsquerdo();
-        }
-        this.ultimo = temp;
     }
 
     public static NoHeap leftChild(NoHeap v){
@@ -73,8 +60,8 @@ public class HeapNos {
         return false;
     }
 
-    /* suponho que, já que um heap com lado direito preenchido e lado esquerdo não preenchido, 
-    a viagem pela esquerda é suficiente */
+    /* suponho que, já que um heap com lado direito preenchido e lado esquerdo não preenchido não 
+    é considerado um heap, a viagem pela esquerda é suficiente */
     public int heapHeigth(){
         NoHeap atual = this.raiz;
         int h = 0;
@@ -88,53 +75,30 @@ public class HeapNos {
     }
 
     public NoHeap last(){
-        NoHeap atual = this.raiz;
-        int h = heapHeigth();
-        int n = 0;
-
-        while (n < h){
-            if (isInternal(rightChild(atual))){
-                atual = atual.getFilhoDireito();
-            } else if (leftChild(atual) != null){
-                atual = atual.getFilhoEsquerdo();
-            } else{
-                if (rightChild(atual) != null){
-                    atual = atual.getFilhoDireito();
-                }
-                else{
-                    atual = atual.getFilhoEsquerdo();
-                }
-                break;
-            }
-            n++;
-        }
-        return atual;
+        return nos.get(this.size - 1);
     }
 
-    public NoHeap nextInsertOrRemove(){
-        NoHeap ultimo = last();
+    public NoHeap nextInsert(){
+        return nos.get((size - 1) / 2);
+    }
 
-        while (ultimo.getPai() != null && ultimo == ultimo.getPai().getFilhoDireito()){
-            ultimo = ultimo.getPai(); // quando parar, ultimo vai ser raiz
-        }
-
-        if (ultimo.getPai() != null && ultimo.getPai().getFilhoDireito() != null){ // verifica se chegou na raiz ou não e evita NullPointerException
-            ultimo = ultimo.getPai().getFilhoDireito();
-        } else {
-            while (leftChild(ultimo) != null){
-                ultimo = ultimo.getFilhoEsquerdo();
-            }
-        }
-        return ultimo;
+    public void swapElements(NoHeap v, NoHeap w){
+        Item temp = v.getElemento();
+		v.setElemento(w.getElemento());
+		w.setElemento(temp);
     }
 
 
-    public void upheap(){
-        //
+    public void upheap(NoHeap v){
+        NoHeap atual = v;
+        while (atual.getPai() != null && atual.getElemento().key() < atual.getPai().getElemento().key()){
+            swapElements(atual, atual.getPai());
+            atual = atual.getPai();
+        }
     }
 
     public void insert(Item o){
-        NoHeap ultimo = nextInsertOrRemove();
+        NoHeap ultimo = nextInsert();
         NoHeap novo = new NoHeap(null, null, ultimo, o);
 
         if (ultimo.getFilhoEsquerdo() != null && ultimo.getFilhoDireito() == null){
@@ -143,12 +107,31 @@ public class HeapNos {
             ultimo.setFilhoEsquerdo(novo);
         }
         this.size++;
-        upheap();
+        nos.add(novo);
+        upheap(novo);
     }
 
-    public void downheap(){
-        //
+    public void downheap(NoHeap v) {
+    NoHeap atual = v;
+
+    while (atual.getFilhoEsquerdo() != null) {
+        NoHeap menorFilho = atual.getFilhoEsquerdo();
+        NoHeap filhoDireito = atual.getFilhoDireito();
+
+        if (filhoDireito != null && filhoDireito.getElemento().key() < menorFilho.getElemento().key()) {
+            menorFilho = filhoDireito;
+        }
+
+        if (atual.getElemento().key() <= menorFilho.getElemento().key()) {
+            break;
+        }
+
+        swapElements(atual, menorFilho);
+
+        atual = menorFilho;
     }
+}
+
 
     public Item removeMin(){
         NoHeap removido = last();
@@ -159,7 +142,10 @@ public class HeapNos {
         } else {
             removido.getPai().setFilhoDireito(null);
         }
-        downheap();
+        removido.setPai(null);
+        nos.remove(this.size - 1);
+        this.size--;
+        downheap(this.raiz);
         return menor;
     }
 }
