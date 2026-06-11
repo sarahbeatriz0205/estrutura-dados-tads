@@ -51,3 +51,68 @@ Uma colisão ocorre quando duas chaves no dicionário têm o mesmo valor de disp
 - **encadeiamento**: itens que colidem são armazenados numa sequência encadeada (lista duplamente encadeada)
 - **endereçamento**: o item que colide é colocado em um lugar diferente na tabela
   - **endereçamento aberto:** verifica se existe vaga ao lado. O find() funciona da mesma maneira, ele percorre e verifica que o número passado é igual a o número encontrado
+
+### Códigos de dispersão
+- **Acumulação polinomial:**
+    - Particiona-se os bits da chave em uma sequencia de componentes de tamanho fixo
+    - Leva em consideração a ordem em que os caracteres estão nas chaves
+    - Plenamente adaptável a String
+      > ex: chaves ABC e CBA
+
+### Mapa de compressão
+#### Divisão
+<img width="195" height="33" alt="image" src="https://github.com/user-attachments/assets/333decbe-5da5-4bb2-a03d-5728d71e5ad0" />
+
+- **O tamanho de N da tabela de dispersão é geralmente um número primo**
+
+#### Multiplicação, Adição e Divisão (MAD)
+<img width="263" height="37" alt="image" src="https://github.com/user-attachments/assets/4a489631-ee81-407e-aae4-c98b0530e3d8" />
+
+- **a e b são inteiros não negativos tais que *a mod N != 0***
+- **Se for igual a zero, a colisão será garantida, pois ele vai mapear sempre no mesmo lugar**
+
+#### Linear Probing
+- **Trata colisões colocando o item que colide na próxima (circular) célula disponível**
+- **Utilizado array circular**
+
+<img width="182" height="39" alt="image" src="https://github.com/user-attachments/assets/fa633c19-6cdc-44df-b110-1383d8823307" />
+
+> Sempre usar o resto da divisão por 13. O resto vai apontar o índice onde eu vou inserir a chave
+
+> Se der colisão, verificar se o índice ao lado está vazio. Se estiver, inserir nele. Senão, continuar a verificar até achar um vago 
+
+> Para encontrar uma chave específica, pegar o resto da divisão da chave por 13. Se o elemento encontrado não for o que foi passado, verifica o do lado e continua até achar
+
+> Caso na busca for encontrado um espaço vazio antes da chave ser encontrada, inserir um objeto no lugar vazio para indicar que ele está disponível para inserção de outras chaves (se houve um elemento removido dele)
+
+~~~
+Algoritmo findElement(k)
+    i <- h(k)
+    p <- 0
+    repita
+        c <- A[i]
+        se c = []
+            retorne NO_SUCH_KEY
+        senão se c.key () = k
+            retorne c.element()
+        senão
+            i <- (i + 1) mod N
+            p <- p + 1
+    até p = N
+    retorne NO_SUCH_KEY
+~~~
+
+### Remoção
+**removeElement(k)**
+- **Procura-se por um item com chave k**
+- **Se o item é encontrado, substitue ele com o objeto especial AVAILABLE e retorna-se o elemento O**
+- **Senão, retorna-se NO_SUCH_KEY**
+
+### Inserção
+**insert Item(k, o)**
+- **Uma exceção é disparada se a tabela está cheia**
+- **Começa-se na célula h(k)**
+- **Procura-se em consecutivas células até que o seguinte ocorra:**
+    - **Uma célula i é encontrada e está vazia ou armazena AVAILABLE, ou**
+    - **N células tenham sido verificadas**
+- **Armazena-se o item na célula i**
