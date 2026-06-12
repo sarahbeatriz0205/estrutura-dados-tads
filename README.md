@@ -13,6 +13,7 @@ Este repositório contém as implementações, algoritmos e exercícios desenvol
 - [TAD Árvore implementado com nós](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_arvore/arvore_generica/Arvore.java)
 - [TAD Árvore Binária implementado com nós](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_arvore/arvore_binaria/ArvoreBinaria.java)
 - [TAD Fila de prioridade implementado com TAD Heap implementado com array](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_heap/heap_array/HeapArray.java)
+- [TAD Fila de prioridade implementado com TAD Heap implementado com uma classe Nó](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_heap/heap_nos/HeapNos.java)
 
 ## Anotações
 - [TAD Pilha](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas/aulas_pilha)
