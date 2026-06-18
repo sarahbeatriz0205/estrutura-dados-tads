@@ -116,3 +116,25 @@ Algoritmo findElement(k)
     - **Uma célula i é encontrada e está vazia ou armazena AVAILABLE, ou**
     - **N células tenham sido verificadas**
 - **Armazena-se o item na célula i**
+
+## Hashing Duplo
+- **Se der colisão na função principal, tentar uma função secundária**
+- **A função secundária basicamente define a quantidade de pulos que vão ser dados se der colisão**
+
+#### Exemplo
+<img width="712" height="501" alt="image" src="https://github.com/user-attachments/assets/be982908-cbcb-4a68-802e-6aa167d2cd0d" />
+
+> No exemplo acima, foram escolhidos de livre e espontânea vontade os números 7 e 13 para as funções primárias e secundárias. Obrigatoriamente os números devem ser primos para garantir que todos os espaços serão visitados
+
+> Se a função secundária também falhar, somar o resultado dado com ele mesmo. Vai ser a quantidade de pulos
+
+### Estratégia de incremento
+**Dobra o tamanho do array (primo) e encontra o maior valor primo mais próximo desse dobro**
+
+### Fator de carga
+```a = quantidade de elementos no hash / tamanho total```
+- **Me retorna a taxa de ocupação do array**
+- **Se passar de 50, dobrar o tamanho**
+
+```1 / (1 - a)```
+- **Número de probes**
