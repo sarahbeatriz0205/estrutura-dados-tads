@@ -1,4 +1,4 @@
-<img width="709" height="225" alt="image" src="https://github.com/user-attachments/assets/681b66d7-5524-4e91-9435-0cfff8fefae6" /># Skiplists
+# Skiplists
 - **É um tipo de dicionário**
 - **Composto por várias listas**
 - **Substituto para lista encadeada**
