@@ -3,30 +3,16 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 
-/* MÉTODOS QUE FALTAM IMPLEMENTAR OU PRECISAM DE CONSERTO!
-
-    inOrder
-
-    postOrder
-    
-    heigth (com parâmetros)
-    
-    remove (bugs)
-
-    height (sem parâmetros)
-   
-    imprimirArvore (completo)
-   
-    elementos (ou método para retornar a lista de nós) */
-
-
-public class ArvoreBinaria{
+public class ArvoreBinariaDePesquisa{
     private NoArvore raiz;
     private int size;
+    private ArrayList<NoArvore> nos;
 
-    public ArvoreBinaria(int o){
+    public ArvoreBinariaDePesquisa(int o){
         this.raiz = new NoArvore(null, null, null, o);
         this.size = 1;
+        this.nos = new ArrayList<>();
+        nos.add(this.raiz);
     }
 
     public int size(){
@@ -48,22 +34,22 @@ public class ArvoreBinaria{
     }
 
     public int heigth(NoArvore r, NoArvore v){
-        if (ArvoreBinaria.isExternal(v)){
+        if (isExternal(v)){
             return 0;
         }
         else{
             int h = 0;
-            Iterator<NoArvore> f = ArvoreBinaria.children(v);
+            Iterator<NoArvore> f = children(v);
             while (f.hasNext()){
                 NoArvore w = f.next();
-                h = Math.max(h, heigth(this.raiz, w));
+                h = Math.max(h, heigth(r, w));
             }
             return 1+h;
         }
     }
 
 
-    public static Iterator<NoArvore> children(NoArvore v){
+    public Iterator<NoArvore> children(NoArvore v){
         List<NoArvore> filhos = new ArrayList<>();
         if (v.getFilhoEsquerdo() != null){
             filhos.add(v.getFilhoEsquerdo());
@@ -74,14 +60,14 @@ public class ArvoreBinaria{
         return filhos.iterator();
     }
 
-    public static boolean isExternal(NoArvore v){
+    public boolean isExternal(NoArvore v){
         if (v.getFilhoEsquerdo() == null && v.getFilhoDireito() == null){
             return true;
         }
         return false;
     }
 
-    public static boolean isInternal(NoArvore v){
+    public boolean isInternal(NoArvore v){
         if (v.getFilhoEsquerdo() != null || v.getFilhoDireito() != null){
             return true;
         }
@@ -99,23 +85,23 @@ public class ArvoreBinaria{
         return this.raiz;
     }
 
-    public static NoArvore leftChild(NoArvore v){
+    public NoArvore leftChild(NoArvore v){
         return v.getFilhoEsquerdo();
     }
 
-    public static NoArvore rightChild(NoArvore v){
+    public NoArvore rightChild(NoArvore v){
         return v.getFilhoDireito();
     }
 
     public boolean hasLeft(NoArvore v){
-        if (ArvoreBinaria.leftChild(v) != null){
+        if (leftChild(v) != null){
             return true;
         }
         return false;
     }
 
     public boolean hasRight(NoArvore v){
-        if (ArvoreBinaria.rightChild(v) != null){
+        if (rightChild(v) != null){
             return true;
         }
         return false;
@@ -124,6 +110,18 @@ public class ArvoreBinaria{
     public NoArvore parent(NoArvore v){
         return v.getPai();
     }
+
+    public Iterator<Object> elements(){
+		ArrayList<Object> elementos = new ArrayList<Object>();
+		for (NoArvore n : nos){
+			elementos.add(n.getElemento());
+		}
+		return elementos.iterator();
+	}
+
+    public Iterator<NoArvore> nos(){
+		return this.nos.iterator();
+	}
 
     public void preOrder(NoArvore v){
         if (v == null){
@@ -139,22 +137,21 @@ public class ArvoreBinaria{
             return;
         }
         postOrder(leftChild(v));
-        visite(v);
         postOrder(rightChild(v));
         visite(v);
     }
 
     public void inOrder(NoArvore v){
-        if (isInternal(v)){
-            inOrder(leftChild(v));
-        } visite(v);
-        if (isInternal(v)){
-            inOrder(rightChild(v));
-        } 
+        if (v == null){
+            return;
+        }
+        inOrder(leftChild(v));
+        visite(v);
+        inOrder(rightChild(v));
     }
 
     public void visite(NoArvore v){
-        System.out.print(v.getElemento());
+        System.out.print(v.getElemento() + " ");
     }
 
     public NoArvore search(int k, NoArvore v){
@@ -184,6 +181,7 @@ public class ArvoreBinaria{
         else {
             encontrado.setFilhoDireito(novo);
         }
+        this.nos.add(novo);
         this.size++;
     } 
 
@@ -191,51 +189,84 @@ public class ArvoreBinaria{
         int element = v.getElemento();
 
         /* Se um nó for externo, basta ele virar null */
-        if (isExternal(v)){
+        if (isExternal(v) && v != null){
             if (v.getElemento() < v.getPai().getElemento()){
                 v.getPai().setFilhoEsquerdo(null);
             } else {
                 v.getPai().setFilhoDireito(null);
             }
+            this.size--;
+            this.nos.remove(v);
             return element;
         }
 
         /* Se o nó tiver apenas UM filho */
-        NoArvore aux = v.getPai();
-        NoArvore esq = v.getFilhoEsquerdo();
-        NoArvore dir = v.getFilhoDireito();
+        if (v.getFilhoEsquerdo() == null || v.getFilhoDireito() == null) {
+            NoArvore filho;
+            if (v.getFilhoEsquerdo() != null)
+                filho = v.getFilhoEsquerdo();
+            else
+                filho = v.getFilhoDireito();
 
-        if ((v.getFilhoEsquerdo() == null && v.getFilhoDireito() != null) || (v.getFilhoEsquerdo() != null && v.getFilhoDireito() == null)){
-            if (v.getFilhoEsquerdo() != null){
-                v.getFilhoEsquerdo().setPai(aux);
-            } else {
-                v.getFilhoDireito().setPai(aux);
-            }
-            if (v.getFilhoEsquerdo().getElemento() < aux.getElemento()){
-                    aux.setFilhoEsquerdo(esq);    
-            } else{
-                aux.setFilhoDireito(dir);
-            }
+            filho.setPai(v.getPai());
+            if (filho.getElemento() < v.getPai().getElemento())
+                v.getPai().setFilhoEsquerdo(filho);
+            else
+                v.getPai().setFilhoDireito(filho);
+            this.size--;
+            this.nos.remove(v);
             return element;
         }
 
         /* Nó com DOIS filhos */
-        NoArvore atual = v.getFilhoDireito();
-        if (v.getFilhoEsquerdo() != null && v.getFilhoDireito() != null){
-             while (isInternal(leftChild(atual))) {
-                atual = atual.getFilhoEsquerdo();
-             }
-             int temp = atual.getElemento();
-             remove(atual);
-             v.getFilhoDireito().getPai().setElemento(temp);
+        NoArvore sucessor = v.getFilhoDireito();
+        while (sucessor.getFilhoEsquerdo() != null) {
+            sucessor = sucessor.getFilhoEsquerdo();
         }
+        int temp = sucessor.getElemento();
+        remove(sucessor);
+        v.setElemento(temp);
         return element;
     }
 
-    public void imprimirArvore(int linhas, int colunas){
-        int[][] matriz = new int[linhas][colunas];
-        int colocacao_raiz = matriz[0].length / 2;
-        matriz[0][colocacao_raiz] = this.raiz.getElemento();
-        /* ainda preciso desenhar melhor como vou fazer isso */
+    private void preencherMatriz(NoArvore no, int[][] matriz, int linha, int coluna, int deslocamento){
+        if (no == null || linha >= matriz.length || coluna < 0 || coluna >= matriz[0].length) return;
+        if (deslocamento < 1) deslocamento = 1;
+        
+        matriz[linha][coluna] = no.getElemento();
+
+        preencherMatriz(
+            no.getFilhoEsquerdo(),
+            matriz,
+            linha + 1,
+            coluna - deslocamento,
+            deslocamento / 2
+        );
+
+        preencherMatriz(
+            no.getFilhoDireito(),
+            matriz,
+            linha + 1,
+            coluna + deslocamento,
+            deslocamento / 2
+        );
+    }
+
+
+    public void imprimirArvore(){
+    int h = heigth(this.raiz, this.raiz);
+    int linhas  = h + 1;
+    int colunas = (int)Math.pow(2, h + 2) - 1;
+
+    int[][] matriz = new int[linhas][colunas];
+    preencherMatriz(this.raiz, matriz, 0, colunas / 2, colunas / 4);
+
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            if (matriz[i][j] == 0) System.out.print("    ");
+            else                   System.out.printf("%4d", matriz[i][j]);
+        }
+        System.out.println();
+        }
     }
 }
