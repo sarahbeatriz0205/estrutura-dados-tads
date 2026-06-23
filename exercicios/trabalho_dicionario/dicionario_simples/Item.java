@@ -1,15 +1,15 @@
-package trabalho_dicionario;
+package dicionario_simples;
 
 public class Item {
-    private Object key;
+    private int key;
     private Object element;
 
-    public Item(Object key, Object element){
+    public Item(int key, Object element){
         this.key = key;
         this.element = element;
     }
 
-    public Object key(){
+    public int key(){
         return this.key;
     }
 

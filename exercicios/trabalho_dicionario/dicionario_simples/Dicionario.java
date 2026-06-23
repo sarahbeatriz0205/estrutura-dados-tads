@@ -1,5 +1,5 @@
-package trabalho_dicionario;
-import java.util.Iterator;
+package dicionario_simples;
+import dicionario_simples.Primo;
 
 public class Dicionario implements IDicionario {
     private Item a[];
@@ -10,22 +10,69 @@ public class Dicionario implements IDicionario {
         a = new Item[tamanho];
     }
 
-    private int keyConvert(Item k){
-        //
+    // falta a função secundária pro hash duplo
+    private int funcaoPrimaria(int k){
+        if (Primo.ehPrimo(this.tamanho)){
+            return k % this.tamanho;
+        }
+        else{
+            int ptrTamanho = this.tamanho;
+            while (!Primo.ehPrimo(ptrTamanho)){
+                ptrTamanho++;
+                Primo.ehPrimo(ptrTamanho);
+            }
+            this.tamanho = ptrTamanho;
+            return k % this.tamanho;
+        }
     }
 
-    public Object findElement(Item k){
-        Object i = keyConvert(k);
+    /* iterador pra chaves improvisado */
+    public int[] keys(){
+        int[] k = new int[this.tamanho];
+        for (int i = 0; i < this.tamanho; i++) {
+            k[i] = a[i].key();
+        }
+        return k;
+    }
+
+    /* iterador pra elementos improvisado */
+    public Object[] elements(){
+        Object[] k = new Object[this.tamanho];
+        for (int i = 0; i < this.tamanho; i++) {
+            k[i] = a[i].value();
+        }
+        return k;
+    }
+
+    public boolean isEmpty(){
+        return this.tamanho == 0;
+    }
+
+    public int size(){
+        return this.tamanho;
+    }
+
+    public Object findElement(Item k) throws NoSuchKeyException{
+        int i = funcaoPrimaria(k.key());
         int p = 0;
 
-        Object c = a[i];
-        if (c == null){
-            return NO_SUCH_KEY;
+        while (p != this.tamanho) {
+            Item c = a[i];
+            if (c == null){
+                throw new NoSuchKeyException("NO_SUCH_KEY");
+            }
+            else if (c.key() == k.key()){
+                return c.value();
+            }
+            else{
+                i = (i+1) % this.tamanho;
+                p++;
+            }   
         }
-        else if (c.key() == k){
-            return c.value();
-        }
+        throw new NoSuchKeyException("NO_SUCH_KEY");
     }
+
+    
 
 
 }
