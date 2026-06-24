@@ -13,4 +13,25 @@ public class Primo {
         }
         return true;
     }
+
+    public static int maiorPrimoMenorQue(int n) {
+        int candidato = n - 1;
+        while (candidato > 1) {
+            if (ehPrimo(candidato)) {
+                return candidato;
+            }
+            candidato--;
+        }
+        return -1;
+    }
+
+    public static int menorPrimoMaiorOuIgualA(int n) {
+        int candidato = n;
+        while (true) {
+            if (ehPrimo(candidato)) {
+                return candidato;
+            }
+            candidato++;
+        }
+    }
 }

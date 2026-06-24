@@ -1,29 +1,27 @@
 package dicionario_simples;
-import dicionario_simples.Primo;
 
 public class Dicionario implements IDicionario {
     private Item a[];
     private int tamanho;
+    private Item AVAILABLE = new Item(-1, "AVAILABLE");
 
     public Dicionario(int tamanho){
-        this.tamanho = tamanho;
+        this.tamanho = Primo.menorPrimoMaiorOuIgualA(tamanho);
         a = new Item[tamanho];
     }
 
-    // falta a função secundária pro hash duplo
     private int funcaoPrimaria(int k){
-        if (Primo.ehPrimo(this.tamanho)){
-            return k % this.tamanho;
-        }
-        else{
-            int ptrTamanho = this.tamanho;
-            while (!Primo.ehPrimo(ptrTamanho)){
-                ptrTamanho++;
-                Primo.ehPrimo(ptrTamanho);
-            }
-            this.tamanho = ptrTamanho;
-            return k % this.tamanho;
-        }
+        return k % this.tamanho;
+    }
+
+    private int funcaoSecundaria(int k){
+        int primoEscolhido = Primo.maiorPrimoMenorQue(this.tamanho);
+        return (primoEscolhido - k) % this.tamanho;
+    }
+
+    private int fatorDeCarga(){
+        int a = keys().length / size(); 
+        return 1 / (1 - a);
     }
 
     /* iterador pra chaves improvisado */
@@ -56,7 +54,7 @@ public class Dicionario implements IDicionario {
         int i = funcaoPrimaria(k.key());
         int p = 0;
 
-        while (p != this.tamanho) {
+        while (p != size()) {
             Item c = a[i];
             if (c == null){
                 throw new NoSuchKeyException("NO_SUCH_KEY");
@@ -72,7 +70,40 @@ public class Dicionario implements IDicionario {
         throw new NoSuchKeyException("NO_SUCH_KEY");
     }
 
-    
+    public Object removeElement(Item k) throws NoSuchKeyException{
+        try{
+            Object item = findElement(k);
+            Object elemento = item;
+            int i = funcaoPrimaria(k.key());
+            int p = 0;
+            while (p != size()){
+                if (i == k.key()){
+                    a[i] = AVAILABLE;
+                    return elemento;
+                }
+                else {
+                    i = (i + 1) % this.tamanho;
+                    p++;
+                }
+            }
+            return elemento;
+            
+        } 
+        catch (NoSuchKeyException e){
+            throw new NoSuchKeyException("NO_SUCH_KEY");
+        }
+    }
+
+    /* fazer função de rehash e insertElement */
+    public void insertElement(Item k){
+        int resultadoPrimario = funcaoPrimaria(k.key());
+        int resultadoSecundario = funcaoSecundaria(k.key());
+        int fatorDeCarga = fatorDeCarga() * 100;
+
+        if (fatorDeCarga > 50){
+            //
+        }
+    }
 
 
 }
