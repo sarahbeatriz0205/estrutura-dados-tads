@@ -19,21 +19,33 @@ public class Dicionario implements IDicionario {
         return (primoEscolhido - k) % this.tamanho;
     }
 
-    private int fatorDeCarga(){
-        int a = keys().length / size(); 
-        return 1 / (1 - a);
+    private double fatorDeCarga(){
+        double alfa = (double) size() / a.length; 
+        return alfa;
     }
 
-    /* iterador pra chaves improvisado */
+    private double probes(){
+        double p = 1 / (1 - fatorDeCarga());
+        return p;
+    }
+
+    private void rehash(Item a[]){
+        int tamanhoNovo = Primo.menorPrimoMaiorOuIgualA(this.tamanho*2);
+        Item[] b = new Item[tamanhoNovo]; 
+
+        /* finalizar depois */
+    }
+
     public int[] keys(){
         int[] k = new int[this.tamanho];
         for (int i = 0; i < this.tamanho; i++) {
-            k[i] = a[i].key();
+            if (a[i] != null){
+                k[i] = a[i].key();
+            }
         }
         return k;
     }
 
-    /* iterador pra elementos improvisado */
     public Object[] elements(){
         Object[] k = new Object[this.tamanho];
         for (int i = 0; i < this.tamanho; i++) {
@@ -46,7 +58,7 @@ public class Dicionario implements IDicionario {
         return this.tamanho == 0;
     }
 
-    public int size(){
+    public double size(){
         return this.tamanho;
     }
 
@@ -94,16 +106,25 @@ public class Dicionario implements IDicionario {
         }
     }
 
-    /* fazer função de rehash e insertElement */
     public void insertElement(Item k){
-        int resultadoPrimario = funcaoPrimaria(k.key());
-        int resultadoSecundario = funcaoSecundaria(k.key());
-        int fatorDeCarga = fatorDeCarga() * 100;
+        double fatorDeCarga = fatorDeCarga() * 100;
 
         if (fatorDeCarga > 50){
-            //
+            rehash(a);
+        }
+
+        int resultado = funcaoPrimaria(k.key());
+        if (a[resultado] != null){
+            resultado = funcaoSecundaria(k.key());
+
+            if (a[resultado] != null){
+                for (int i=resultado + 1; i < size(); i += resultado){
+                    if (a[i] == null || a[i] == this.AVAILABLE){
+                        a[i] = k;
+                    }
+                }
+            }
         }
     }
-
 
 }
