@@ -25,15 +25,22 @@ public class Dicionario implements IDicionario {
     }
 
     private double probes(){
-        double p = 1 / (1 - fatorDeCarga());
+        double p = 1.0 / (1.0 - fatorDeCarga());
         return p;
     }
 
-    private void rehash(Item a[]){
+    private void rehash(){
         int tamanhoNovo = Primo.menorPrimoMaiorOuIgualA(this.tamanho*2);
-        Item[] b = new Item[tamanhoNovo]; 
+        Item[] ptrAntiga = this.a;
+        a = new Item[tamanhoNovo]; 
+        this.tamanho = 0;
 
-        /* finalizar depois */
+        for (Item item : ptrAntiga){
+            if (item != null){
+                insertElement(item);
+            }
+        }
+        this.tamanho = tamanhoNovo;
     }
 
     public int[] keys(){
@@ -58,7 +65,7 @@ public class Dicionario implements IDicionario {
         return this.tamanho == 0;
     }
 
-    public double size(){
+    public int size(){
         return this.tamanho;
     }
 
@@ -110,19 +117,17 @@ public class Dicionario implements IDicionario {
         double fatorDeCarga = fatorDeCarga() * 100;
 
         if (fatorDeCarga > 50){
-            rehash(a);
+            rehash();
         }
 
-        int resultado = funcaoPrimaria(k.key());
-        if (a[resultado] != null){
-            resultado = funcaoSecundaria(k.key());
+        int resultadoPrimario = funcaoPrimaria(k.key());
+        int resultadoSecundario = funcaoSecundaria(k.key());
 
-            if (a[resultado] != null){
-                for (int i=resultado + 1; i < size(); i += resultado){
-                    if (a[i] == null || a[i] == this.AVAILABLE){
-                        a[i] = k;
-                    }
-                }
+        for (int i = 0; i < a.length; i++){
+            int posicao = resultadoPrimario + (i*resultadoSecundario) % this.a.length;
+
+            if (this.a[posicao] == null || this.a[posicao] == this.AVAILABLE){
+                this.a[posicao] = k;
             }
         }
     }
