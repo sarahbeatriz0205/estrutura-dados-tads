@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArvoreBinariaDePesquisa{
-    private NoArvore raiz;
-    private int size;
-    private ArrayList<NoArvore> nos;
+    public NoArvore raiz;
+    public int size;
+    public ArrayList<NoArvore> nos;
 
     public ArvoreBinariaDePesquisa(int o){
         this.raiz = new NoArvore(null, null, null, o);
