@@ -2,6 +2,7 @@
 
 Este repositório contém as implementações, algoritmos e exercícios desenvolvidos durante a disciplina de **Estrutura de Dados Lineares** e as que virão a ser desenvolvidas na disciplina de **Estrutura de Dados Não Lineares** do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas do IFRN**. O foco do projeto é o estudo da **eficiência de algoritmos**, **manipulação de memória** e **tipos abstratos de dados**.
 
+## Linguagem predominante
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
 ## Implementações
@@ -15,6 +16,7 @@ Este repositório contém as implementações, algoritmos e exercícios desenvol
 - **[TAD Fila de prioridade implementado com TAD Heap implementado com array](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_heap/heap_array/HeapArray.java)**
 - **[TAD Fila de prioridade implementado com TAD Heap implementado com uma classe Nó](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_heap/heap_nos/HeapNos.java)**
 - **[Dicionário implementado com tabela Hash](https://github.com/sarahbeatriz0205/estrutura-dados-tads/blob/main/exercicios/trabalho_dicionario/dicionario_simples/Dicionario.java)**
+- **[Método de ordenação Tree Sort implementado com Árvore Binária de Pesquisa](https://github.com/sarahbeatriz0205/estrutura-dados-tads/blob/main/exercicios/trabalho_arvore/arvore_binaria/TreeSort.java)**
 
 ## Anotações
 - **[TAD Pilha](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/aulas/aulas_pilha)**
