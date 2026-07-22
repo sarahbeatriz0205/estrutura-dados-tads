@@ -2,8 +2,10 @@
 
 Este repositório contém as implementações, algoritmos e exercícios desenvolvidos durante a disciplina de **Estrutura de Dados Lineares** e as que virão a ser desenvolvidas na disciplina de **Estrutura de Dados Não Lineares** do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas do IFRN**. O foco do projeto é o estudo da **eficiência de algoritmos**, **manipulação de memória** e **tipos abstratos de dados**.
 
-## Linguagem predominante
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+## Linguagem
+<img style="height: 60px;" alt="python logo" src="https://skillicons.dev/icons?i=java">
+<!--<img style="height: 60px;" alt="python logo" src="https://skillicons.dev/icons?i=cs">-->
+
 
 ## Implementações
 - **[TAD Pilha implementado com array armazenando duas pilhas simultâneas](https://github.com/sarahbeatriz0205/estrutura-dados-tads/tree/main/exercicios/trabalho_pilha)**
